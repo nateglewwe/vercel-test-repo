@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+//THIS IS A OLD KIND OF COMPONENT THAT DOESN'T GET USED FOR REACT ANYMORE
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name TemplateClass with the name for the new

@@ -44,7 +44,14 @@ function App() {
     <Router>
       <div>
         <Header />
-        <Nav />
+        {/* If no user is logged in, don't render the nav bar */}
+        {user.id && (
+          // If there's no user, don't show nav bar
+          <Nav />
+        )}
+
+
+
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from="/" to="/home" />
