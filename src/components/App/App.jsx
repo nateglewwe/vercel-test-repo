@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header.jsx';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -19,6 +20,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import RegistrationSuccessPage from '../RegistrationSuccessPage/RegistrationSuccessPage.jsx';
 
 import './App.css';
 
@@ -34,6 +36,7 @@ function App() {
   return (
     <Router>
       <div>
+        <Header />
         <Nav />
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
@@ -93,6 +96,20 @@ function App() {
               :
               // Otherwise, show the registration page
               <RegisterPage />
+            }
+          </Route>
+
+          <Route
+            exact
+            path="/registrationsuccess"
+          >
+            {user.id ?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <Redirect to="/user" />
+              :
+              // Otherwise, show the registration page
+              <RegistrationSuccessPage />
             }
           </Route>
 
