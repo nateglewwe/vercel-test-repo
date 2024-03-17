@@ -21,6 +21,13 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RegistrationSuccessPage from '../RegistrationSuccessPage/RegistrationSuccessPage.jsx';
+import GearListPage from '../GearListPage/GearListPage';
+import EventListPage from '../EventListPage/EventListPage';
+import AddGearPage from '../AddGearPage/AddGearPage';
+import AddEventPage from '../AddEventPage/AddEventPage';
+import UpdateGearPage from '../UpdateGearPage/UpdateGearPage';
+import UpdateEventPage from '../UpdateEventPage/UpdateEventPage';
+
 
 import './App.css';
 
@@ -69,6 +76,54 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows GearListPage else shows LoginPage
+            exact
+            path="/gearlist"
+          >
+            <GearListPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows EventListPage else shows LoginPage
+            exact
+            path="/eventlist"
+          >
+            <EventListPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddGearPage else shows LoginPage
+            exact
+            path="/addgear"
+          >
+            <AddGearPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddEventPage else shows LoginPage
+            exact
+            path="/addevent"
+          >
+            <AddEventPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UpdateGearPage else shows LoginPage
+            exact
+            path="/updategear"
+          >
+            <UpdateGearPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UpdateEventPage else shows LoginPage
+            exact
+            path="/updateevent"
+          >
+            <UpdateEventPage />
           </ProtectedRoute>
 
           <Route
