@@ -165,14 +165,7 @@ function App() {
             exact
             path="/registrationsuccess"
           >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the registration page
-              <RegistrationSuccessPage />
-            }
+            <RegistrationSuccessPage />
           </Route>
 
           <Route
