@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
+  const registrationConfirmation = useSelector((store) => store.registrationConfirmation)
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -17,6 +20,11 @@ function RegisterForm() {
         password: password,
       },
     });
+
+    if (registrationConfirmation === 201) {
+      history.push('/registrationsuccess');
+      dispatch({type: 'SET_REGISTRATION_CONFIRMATION', payload: {status: {}}})
+    } //DO I NEED TO MAKE THIS INTO A TRY/CATCH BLOCK ASYNC AWAIT FUNCTION FOR THIS IF STATEMENT TO WORK?
   }; // end registerUser
 
   return (

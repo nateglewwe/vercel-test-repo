@@ -11,7 +11,7 @@ function* registerUser(action) {
     // passes the username and password from the payload to the server
     const theDispatch = yield axios.post('/api/user/register', action.payload);
     //console.log('THE DISPATCH THING:', theDispatch);
-    yield put ({ type: 'SET_REGISTRATION CONFIRMATION', payload: theDispatch})
+    yield put ({ type: 'SET_REGISTRATION_CONFIRMATION', payload: theDispatch})
 
     // automatically log a user in after registration
     //yield put({ type: 'LOGIN', payload: action.payload }); TURNING OFF AUTO-LOGIN SO THAT WE GO TO REGISTRATION SUCCESS PAGE INSTEAD

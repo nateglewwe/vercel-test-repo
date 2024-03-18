@@ -1,5 +1,5 @@
 const registrationConfirmation = (state = {}, action) => {
-    if (action.type === 'SET_REGISTRATION CONFIRMATION') {
+    if (action.type === 'SET_REGISTRATION_CONFIRMATION') {
         const newState = action.payload.status;
         console.log('THIS SHOULD BE 201 HOPEFULLY:', newState);
         return newState;

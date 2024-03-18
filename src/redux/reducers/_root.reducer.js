@@ -12,7 +12,7 @@ import registrationConfirmation from './registrationConfirmation.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  registrationConfirmation,
+  registrationConfirmation, //should contain '201' as confirmation of registration after dispatching Register saga
 });
 
 export default rootReducer;
