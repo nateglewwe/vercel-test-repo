@@ -47,13 +47,23 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-router.get('/gear', (req, res) => {
+router.get('/gear/:id', (req, res) => {
   const queryText = `
     SELECT * FROM "gear_list"
     WHERE "gear_list".user_id = $1
     ORDER BY "name" ASC;
   `;
-  const queryArgs = []
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Single users gear has been fetched from DB and sent to client-side:', result.rows);
+    // This returns the movie as an object, not an array
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR in GET gear server route', err);
+    res.sendStatus(500)
+  })
 });
 
 module.exports = router;

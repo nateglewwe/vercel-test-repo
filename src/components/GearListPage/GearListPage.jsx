@@ -5,10 +5,11 @@ function GearListPage(props) {
 
   const dispatch = useDispatch();
   const gear = useSelector((store) => store.gear);
+  const userId = useSelector((store) => store.user.id);
   const [heading, setHeading] = useState('This is the Gear List Page!'); //GET RID OF THIS PLACEHOLDER LATER
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_GEAR' });
+    dispatch({ type: 'FETCH_GEAR', payload: userId });
   }, []);
 
   return (
