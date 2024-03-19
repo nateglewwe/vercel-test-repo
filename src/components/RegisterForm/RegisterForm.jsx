@@ -22,8 +22,8 @@ function RegisterForm() {
     });
 
     if (registrationConfirmation === 201) {
-      history.push('/registrationsuccess');
-      dispatch({type: 'SET_REGISTRATION_CONFIRMATION', payload: {status: {}}})
+    history.push('/registrationsuccess');
+    dispatch({type: 'SET_REGISTRATION_CONFIRMATION', payload: {status: {}}})
     } //DO I NEED TO MAKE THIS INTO A TRY/CATCH BLOCK ASYNC AWAIT FUNCTION FOR THIS IF STATEMENT TO WORK?
   }; // end registerUser
 
