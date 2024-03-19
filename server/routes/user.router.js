@@ -47,4 +47,13 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.get('/gear', (req, res) => {
+  const queryText = `
+    SELECT * FROM "gear_list"
+    WHERE "gear_list".user_id = $1
+    ORDER BY "name" ASC;
+  `;
+  const queryArgs = []
+});
+
 module.exports = router;
