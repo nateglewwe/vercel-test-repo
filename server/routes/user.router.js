@@ -66,6 +66,23 @@ router.get('/gear', (req, res) => {
   })
 });
 
+router.get('/geartoupdate/:id', (req, res) => {
+  const queryText = `
+    SELECT * FROM "gear_list"
+    WHERE "gear_list".id = $1;
+  `;
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Piece of gear with following ID has been fetched from DB:', req.params.id);
+    res.send(result.rows);
+  })
+  .catch((err) => {
+    console.log('ERROR in GET gearToUpdate server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 router.delete('/gear/:id', (req, res) => {
   const queryText = `
   DELETE FROM "gear_list"

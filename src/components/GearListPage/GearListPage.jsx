@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function GearListPage(props) {
 
   const dispatch = useDispatch();
   const gear = useSelector((store) => store.gear);
   const events = useSelector((store) => store.events);
-  const userId = useSelector((store) => store.user.id);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR' });
-    dispatch({ type: 'FETCH_EVENTS', payload: userId });
+    dispatch({ type: 'FETCH_EVENTS' });
   }, []);
+
+  function updateBtnClk(toolId, toolName) {
+    console.log('Taking piece of gear to update page:', toolName);
+    history.push({pathname: '/updategear', state: toolId})
+  }
 
   function deleteBtnClk(toolId, toolName) {
     console.log('Deleting piece of gear:', toolName);
@@ -49,7 +55,7 @@ function GearListPage(props) {
                   )
                 })}
               </select>
-              <input type="button" value="Update Gear"/>
+              <input type="button" value="Update Gear" onClick={() => updateBtnClk(tool.id, tool.name)}/>
               <input type="button" value="Delete Gear" onClick={() => deleteBtnClk(tool.id, tool.name)}/>
             </div>
           );

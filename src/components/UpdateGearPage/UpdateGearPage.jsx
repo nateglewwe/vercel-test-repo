@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function UpdateGearPage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
+
+  const dispatch = useDispatch();
   const store = useSelector((store) => store);
   const [heading, setHeading] = useState('This is the Update Gear Page!');
+  const history = useHistory();
+  const gear = useSelector((store) => store.gear);
+  const gearId = history.location.state;
 
+  useEffect(() => {
+    dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: gearId });
+  }, []);
   return (
     <div>
-      <h2>{heading}</h2>
+      <h2>{heading} And this is the gear ID number: {gearId}</h2>
+      <h1>{gear[0].name}</h1>
     </div>
   );
 }

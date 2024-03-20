@@ -13,6 +13,18 @@ function* fetchGear (action) {
     }
 }
 
+function* fetchGearToUpdate (action) {
+    try {
+        //get single piece of gear to update
+        const singleGear = yield axios.get(`/api/user/geartoupdate/${action.payload}`)
+        //put the single gear in the gear reducer
+        yield put({ type: 'SET_GEAR', payload: singleGear.data })
+    }
+    catch(err) {
+        console.log('fetchGearToUpdate saga error:', err);
+    }
+}
+
 function* deleteGear (action) {
     try {
         //Send ID of gear to be deleted
@@ -29,6 +41,7 @@ function* deleteGear (action) {
 function* gearSaga() {
     yield takeLatest('FETCH_GEAR', fetchGear);
     yield takeLatest('DELETE_GEAR', deleteGear);
+    yield takeLatest('FETCH_GEAR_TO_UPDATE', fetchGearToUpdate);
   }
   
   export default gearSaga;
