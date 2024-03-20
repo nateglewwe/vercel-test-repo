@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
-import {useSelector} from 'react-redux';
-
 
 function* fetchGear (action) {
     try {
         //get the gear
-        const gearResponse = yield axios.get(`/api/user/gear/${action.payload}`); //FINISH THE OTHER SIDE OF THIS AXIOS CALL ON SERVER
+        const gearResponse = yield axios.get(`/api/user/gear/${action.payload}`);
         //put the gear data in its reducer
         yield put({
             type: 'SET_GEAR',

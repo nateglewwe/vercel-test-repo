@@ -57,11 +57,30 @@ router.get('/gear/:id', (req, res) => {
   pool.query(queryText, queryArgs)
   .then(result => {
     console.log('Single users gear has been fetched from DB and sent to client-side:', result.rows);
-    // This returns the movie as an object, not an array
+    // This returns the gear as an array of objects
     res.send(result.rows);
   })
   .catch(err => {
     console.log('ERROR in GET gear server route', err);
+    res.sendStatus(500)
+  })
+});
+
+router.get('/events/:id', (req, res) => {
+  const queryText = `
+    SELECT * FROM "event_list"
+    WHERE "event_list".user_id = $1
+    ORDER BY "name" ASC;
+  `;
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Single users events have been fetched from DB and sent to client-side:', result.rows);
+    // This returns the events as an array of objects
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR in GET events server route', err);
     res.sendStatus(500)
   })
 });
