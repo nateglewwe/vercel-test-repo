@@ -47,13 +47,13 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-router.get('/gear/:id', (req, res) => {
+router.get('/gear', (req, res) => {
   const queryText = `
     SELECT * FROM "gear_list"
     WHERE "gear_list".user_id = $1
     ORDER BY "name" ASC;
   `;
-  const queryArgs = [req.params.id]
+  const queryArgs = [req.user.id]
   pool.query(queryText, queryArgs)
   .then(result => {
     console.log('Single users gear has been fetched from DB and sent to client-side:', result.rows);
@@ -66,13 +66,30 @@ router.get('/gear/:id', (req, res) => {
   })
 });
 
-router.get('/events/:id', (req, res) => {
+router.delete('/gear/:id', (req, res) => {
+  const queryText = `
+  DELETE FROM "gear_list"
+  WHERE "gear_list".id = $1;
+  `;
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Gear with following ID has been DELETED from DB:', req.params.id);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in DELETE gear server route:', err);
+    res.sendStatus(500);
+  });
+});
+
+router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"
     WHERE "event_list".user_id = $1
     ORDER BY "name" ASC;
   `;
-  const queryArgs = [req.params.id]
+  const queryArgs = [req.user.id]
   pool.query(queryText, queryArgs)
   .then(result => {
     console.log('Single users events have been fetched from DB and sent to client-side:', result.rows);

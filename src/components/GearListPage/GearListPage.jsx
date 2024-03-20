@@ -9,9 +9,14 @@ function GearListPage(props) {
   const userId = useSelector((store) => store.user.id);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_GEAR', payload: userId });
+    dispatch({ type: 'FETCH_GEAR' });
     dispatch({ type: 'FETCH_EVENTS', payload: userId });
   }, []);
+
+  function deleteBtnClk(toolId, toolName) {
+    console.log('Deleting piece of gear:', toolName);
+    dispatch({ type: 'DELETE_GEAR', payload: toolId });
+  }
 
   return (
     <div>
@@ -45,7 +50,7 @@ function GearListPage(props) {
                 })}
               </select>
               <input type="button" value="Update Gear"/>
-              <input type="button" value="Delete Gear"/>
+              <input type="button" value="Delete Gear" onClick={() => deleteBtnClk(tool.id, tool.name)}/>
             </div>
           );
         })}
