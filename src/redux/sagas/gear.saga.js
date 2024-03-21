@@ -43,11 +43,25 @@ function* deletePhoto (action) {
         //Send ID of gear to have its photo deleted
         yield axios.put(`/api/user/gearPhotoDelete/${action.payload}`);
 
-        //Call fetchGearToUpdate saga to update the DOM after deleting photo DOES THIS ACTUALLY WORK?????
+        //Call fetchGearToUpdate saga to update the DOM after deleting photo
         yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload });
     }
     catch(err) {
         console.log('deleteGear saga error:', err);
+    }
+}
+
+function* changeGearName (action) {
+    try {
+        //Send ID and new name of gear to have its name changed
+        console.log('THE SAGA PAYLOAD:', action.payload);
+        yield axios.put(`/api/user/gearChangeName/${action.payload.id}`, action.payload);
+
+        //Call fetchGearToUpdate saga to update the DOM after changing name DOES THIS ACTUALLY WORK?????
+        yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('changeGearName saga error:', err);
     }
 }
 
@@ -56,6 +70,7 @@ function* gearSaga() {
     yield takeLatest('DELETE_GEAR', deleteGear);
     yield takeLatest('FETCH_GEAR_TO_UPDATE', fetchGearToUpdate);
     yield takeLatest('DELETE_PHOTO', deletePhoto);
+    yield takeLatest('CHANGE_GEAR_NAME', changeGearName);
   }
   
   export default gearSaga;

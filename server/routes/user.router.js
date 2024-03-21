@@ -118,6 +118,25 @@ router.put('/gearPhotoDelete/:id', (req, res) => {
   });
 });
 
+router.put('/gearChangeName/:id', (req, res) => {
+  console.log('THE SERVER REQ.BODY', req.body);
+  const queryText = `
+  UPDATE "gear_list"
+  SET name = $2
+  WHERE "gear_list".id = $1;
+  `;
+  const queryArgs = [req.params.id, req.body.newName]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Gear with following ID has had name changed to:', req.params.id, req.body.name);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in changing gear name server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"
