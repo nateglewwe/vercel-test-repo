@@ -100,6 +100,24 @@ router.delete('/gear/:id', (req, res) => {
   });
 });
 
+router.put('/gearPhotoDelete/:id', (req, res) => {
+  const queryText = `
+  UPDATE "gear_list"
+  SET photo = null
+  WHERE "gear_list".id = $1;
+  `;
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Gear with following ID has had photo deleted from DB:', req.params.id);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in deleting gear photo server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"

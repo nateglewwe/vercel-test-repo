@@ -38,10 +38,24 @@ function* deleteGear (action) {
     }
 }
 
+function* deletePhoto (action) {
+    try {
+        //Send ID of gear to have its photo deleted
+        yield axios.put(`/api/user/gearPhotoDelete/${action.payload}`);
+
+        //Call fetchGearToUpdate saga to update the DOM after deleting photo DOES THIS ACTUALLY WORK?????
+        yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload });
+    }
+    catch(err) {
+        console.log('deleteGear saga error:', err);
+    }
+}
+
 function* gearSaga() {
     yield takeLatest('FETCH_GEAR', fetchGear);
     yield takeLatest('DELETE_GEAR', deleteGear);
     yield takeLatest('FETCH_GEAR_TO_UPDATE', fetchGearToUpdate);
+    yield takeLatest('DELETE_PHOTO', deletePhoto);
   }
   
   export default gearSaga;

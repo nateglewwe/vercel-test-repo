@@ -16,7 +16,7 @@ function GearListPage(props) {
 
   function updateBtnClk(toolId, toolName) {
     console.log('Taking piece of gear to update page:', toolName);
-    history.push({pathname: '/updategear', state: toolId})
+    history.push(`/updategear/${toolId}`)
   }
 
   function deleteBtnClk(toolId, toolName) {

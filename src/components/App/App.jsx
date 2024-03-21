@@ -120,7 +120,7 @@ function App() {
           <ProtectedRoute
             // logged in shows UpdateGearPage else shows LoginPage
             exact
-            path="/updategear"
+            path="/updategear/:toolId"
           >
             <UpdateGearPage />
           </ProtectedRoute>
