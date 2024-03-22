@@ -78,6 +78,11 @@ null,
 '16 XLR inputs','2 TRS inputs', '8 XLR outputs', 'Network port', null, null, null, null,
 'Use with Wi-Fi router', 'Can be rack mounted', 'Include IEC cable', null, null, null, null, null,
 null,
+1)
+('Shure Beta 58A Mic',
+'Handheld Dynamic Mic','Supercardioid polar pattern', '50Hz-16kHz Frequency Response', null, null, null, null, null,
+'DO NOT DROP THE MIC!', null, null, null, null, null, null, null,
+null,
 1);
 
 --Test data for events_list table
@@ -101,4 +106,18 @@ VALUES
 '1pm arrival', 'Setup by 2pm', 'Four singers this time', 'Keyboard into mixer', null, null, null, null,
 'angie@gmail.com', null,
  4, 3, null, null, null, null, null, null,
- 2);
+ 2)
+ 
+ ('SOAR Arts Finding Nemo Jr',
+'[2024-02-10, 2024-02-18]',
+'Load-in Friday evening', 'Demo mics for kids', 'Tech all day Sunday', 'Just keep swimming!', null, null, null, null,
+'terry@gmail.com', null,
+ 2, 3, null, null, null, null, null, null,
+ 2)
+ 
+ ('Greg borrows my speakers',
+'[2024-08-01, 2024-08-01]',
+'Remember IEC cables', 'He has everything else', null, null, null, null, null, null,
+'greg@gmail.com', null,
+ 3, null, null, null, null, null, null, null,
+ 1);

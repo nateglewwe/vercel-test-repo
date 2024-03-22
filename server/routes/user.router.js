@@ -75,7 +75,13 @@ router.get('/geartoupdate/:id', (req, res) => {
   pool.query(queryText, queryArgs)
   .then(result => {
     console.log('Piece of gear with following ID has been fetched from DB:', req.params.id);
-    res.send(result.rows);
+    if (result.rows && result.rows.length > 0) {
+      //Send back a piece of gear as a single object from the result.rows array
+      res.send(result.rows[0])
+    } else {
+      console.log('ERROR: gear not found');
+      res.sendStatus(500)
+    }
   })
   .catch((err) => {
     console.log('ERROR in GET gearToUpdate server route:', err);
@@ -119,7 +125,6 @@ router.put('/gearPhotoDelete/:id', (req, res) => {
 });
 
 router.put('/gearChangeName/:id', (req, res) => {
-  console.log('THE SERVER REQ.BODY', req.body);
   const queryText = `
   UPDATE "gear_list"
   SET name = $2

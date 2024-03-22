@@ -18,7 +18,7 @@ function* fetchGearToUpdate (action) {
         //get single piece of gear to update
         const singleGear = yield axios.get(`/api/user/geartoupdate/${action.payload}`)
         //put the single gear in the gear reducer
-        yield put({ type: 'SET_GEAR', payload: singleGear.data })
+        yield put({ type: 'SET_GEAR_TO_UPDATE', payload: singleGear.data })
     }
     catch(err) {
         console.log('fetchGearToUpdate saga error:', err);
@@ -54,7 +54,6 @@ function* deletePhoto (action) {
 function* changeGearName (action) {
     try {
         //Send ID and new name of gear to have its name changed
-        console.log('THE SAGA PAYLOAD:', action.payload);
         yield axios.put(`/api/user/gearChangeName/${action.payload.id}`, action.payload);
 
         //Call fetchGearToUpdate saga to update the DOM after changing name DOES THIS ACTUALLY WORK?????

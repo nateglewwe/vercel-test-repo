@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 function GearListPage(props) {
 
   const dispatch = useDispatch();
-  const gear = useSelector((store) => store.gear);
+  const gear = useSelector((store) => store.gear.gearList);
   const events = useSelector((store) => store.events);
   const history = useHistory();
 
