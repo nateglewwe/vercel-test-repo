@@ -56,7 +56,7 @@ function* changeGearName (action) {
         //Send ID and new name of gear to have its name changed
         yield axios.put(`/api/user/gearChangeName/${action.payload.id}`, action.payload);
 
-        //Call fetchGearToUpdate saga to update the DOM after changing name DOES THIS ACTUALLY WORK?????
+        //Call fetchGearToUpdate saga to update the DOM after changing name
         yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
     }
     catch(err) {

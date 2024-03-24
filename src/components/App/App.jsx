@@ -28,7 +28,6 @@ import AddEventPage from '../AddEventPage/AddEventPage';
 import UpdateGearPage from '../UpdateGearPage/UpdateGearPage';
 import UpdateEventPage from '../UpdateEventPage/UpdateEventPage';
 
-
 import './App.css';
 
 function App() {
