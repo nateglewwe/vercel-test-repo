@@ -64,12 +64,27 @@ function* changeGearName (action) {
     }
 }
 
+function* changeGearFeature (action) {
+    try {
+        //Send toolID, new feature value, and featureKey/feature column number
+        console.log('THIS IS THE FEATURE PAYLOAD:', action.payload);
+        yield axios.put(`/api/user/gearChangeFeature/${action.payload.id}`, action.payload);
+
+        //Call fetchGearToUpdate saga to update the DOM after changing name
+        yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('changeGearFeature saga error:', err);
+    }
+}
+
 function* gearSaga() {
     yield takeLatest('FETCH_GEAR', fetchGear);
     yield takeLatest('DELETE_GEAR', deleteGear);
     yield takeLatest('FETCH_GEAR_TO_UPDATE', fetchGearToUpdate);
     yield takeLatest('DELETE_PHOTO', deletePhoto);
     yield takeLatest('CHANGE_GEAR_NAME', changeGearName);
+    yield takeLatest('UPDATE_GEAR_FEATURE', changeGearFeature);
   }
   
   export default gearSaga;

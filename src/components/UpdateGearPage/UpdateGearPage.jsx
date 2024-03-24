@@ -49,17 +49,6 @@ function UpdateGearPage(props) {
       <p>{gear.name}</p>
       <div>
         <h4>Features:</h4>
-        {/* {features.map((feature, index) => {
-          return(
-            <div key={index}>
-              {feature && (<>
-                <span >{feature}</span>                
-                <input type="button" value="Edit" onClick={() => editFeature()}  />
-                <input type="button" value="X" onClick={() => deleteFeature()}  />
-              </>)}
-            </div>
-          )
-        })} */}
         {gearFeatures}
       </div>
       <input id="notesInput" placeholder="Notes" //onChange={'PUT A FUNCTION HERE?'}
