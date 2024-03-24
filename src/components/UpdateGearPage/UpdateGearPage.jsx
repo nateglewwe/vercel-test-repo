@@ -12,7 +12,7 @@ function UpdateGearPage(props) {
   const gear = useSelector((store) => store.gear.gearToUpdate);
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
                     gear.feature_5, gear.feature_6, gear.feature_7, gear.feature_8]
-  const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} key={index}/>)
+  const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} featureKey = {`feature_${index+1}`} key={index}/>)
   
   
   const notes = [gear.note_1, gear.note_2, gear.note_3, gear.note_4,
@@ -49,7 +49,7 @@ function UpdateGearPage(props) {
       <p>{gear.name}</p>
       <div>
         <h4>Features:</h4>
-        {features.map((feature, index) => {
+        {/* {features.map((feature, index) => {
           return(
             <div key={index}>
               {feature && (<>
@@ -59,7 +59,7 @@ function UpdateGearPage(props) {
               </>)}
             </div>
           )
-        })}
+        })} */}
         {gearFeatures}
       </div>
       <input id="notesInput" placeholder="Notes" //onChange={'PUT A FUNCTION HERE?'}
