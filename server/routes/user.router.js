@@ -178,6 +178,24 @@ router.put('/gearChangeNote/:id', (req, res) => {
   });
 });
 
+router.put('/gearAssignEvent/:id', (req, res) => {
+  const queryText = `
+  UPDATE "gear_list"
+  SET event_id = $2
+  WHERE "gear_list".id = $1;
+  `;
+  const queryArgs = [req.params.id, req.body.eventId]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Gear with following ID has had event_id changed to:', req.params.id, req.body.eventId);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in assigning gear to event server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"

@@ -95,7 +95,8 @@ function* changeGearNote (action) {
 function* assignToEvent (action) {
     try {
         //Send toolID and eventID
-        yield axios.put(`/api/user/gearChangeNote/${action.payload.id}`, action.payload);
+        console.log('THIS IS THE ASSIGNEVENT PAYLOAD:', action.payload);
+        yield axios.put(`/api/user/gearAssignEvent/${action.payload.id}`, action.payload);
 
         //Call fetchGearToUpdate saga to update the DOM after changing name IS THIS NOT NECESSARY FOR THIS SAGA??
         yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
