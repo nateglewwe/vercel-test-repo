@@ -9,6 +9,7 @@ function UpdateGearPage(props) {
 
   const dispatch = useDispatch();
   const [nameInput, setNameInput] = useState('');
+  let [isEditing, setIsEditing] = useState(false)
   const history = useHistory();
   const gear = useSelector((store) => store.gear.gearToUpdate);
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
@@ -32,9 +33,12 @@ function UpdateGearPage(props) {
     if (event.key && event.key !== 'Enter'){
       return;
     }
-    console.log('Changing name of gear to:', nameInput );
-    dispatch({ type: 'CHANGE_GEAR_NAME', payload: {newName: nameInput, id: toolId} })
-    setNameInput('')
+    if (isEditing === true) {
+      console.log('Changing name of gear to:', nameInput );
+      dispatch({ type: 'CHANGE_GEAR_NAME', payload: {newName: nameInput, id: toolId} })
+      setNameInput('')
+    }
+    setIsEditing(!isEditing)
   }
 
   return (
@@ -42,11 +46,14 @@ function UpdateGearPage(props) {
       {gear && (<>
       <p>{gear.photo}</p>
       <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />
+      
+      <h4>Name:</h4>
+      {isEditing ?
       <input id="nameInput" placeholder="Name" value={nameInput}
         onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
-      <input type="button" value="Change Name" onClick={changeName}  />
-      <h4>Name:</h4>
-      <p>{gear.name}</p>
+      :
+      <span>{gear.name}</span>}&nbsp;
+      <input type="button" value={isEditing ? "Save" : "Edit"} onClick={changeName}  />
       <div>
         <h4>Features:</h4>
         {gearFeatures}
