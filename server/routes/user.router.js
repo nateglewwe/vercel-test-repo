@@ -160,6 +160,24 @@ router.put('/gearChangeFeature/:id', (req, res) => {
   });
 });
 
+router.put('/gearChangeNote/:id', (req, res) => {
+  const queryText = `
+  UPDATE "gear_list"
+  SET $2 = $3
+  WHERE "gear_list".id = $1;
+  `;
+  const queryArgs = [req.params.id, req.body.noteKey, req.body.note]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Gear with following ID has had note changed to:', req.params.id, req.body.featureKey, req.body.feature);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in changing gear note server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"

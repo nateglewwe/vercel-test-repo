@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-
-
-function EditableFeature ({initialValue, featureKey }) {
+function EditableNote ({initialValue, noteKey }) {
     const dispatch = useDispatch();
     let [isEditing, setIsEditing] = useState(false)
     let [value, setValue] = useState(initialValue)
@@ -16,12 +14,11 @@ function EditableFeature ({initialValue, featureKey }) {
             return;
           }
         if (isEditing === true) {
-            //DISPATCH HERE WITH VALUE BEING EDITED, AND FEATUREKEY, AND TOOLID
-            dispatch({ type: 'UPDATE_GEAR_FEATURE', payload: {feature: value, featureKey: featureKey, id: toolId} });
+            //DISPATCH HERE WITH VALUE BEING EDITED, AND NOTEKEY, AND TOOLID
+            dispatch({ type: 'UPDATE_GEAR_NOTE', payload: {note: value, noteKey: noteKey, id: toolId} });
         }
         setIsEditing(!isEditing)
     }
-
 
     return (
         <>
@@ -39,4 +36,4 @@ function EditableFeature ({initialValue, featureKey }) {
     )
 }
 
-export default EditableFeature;
+export default EditableNote;

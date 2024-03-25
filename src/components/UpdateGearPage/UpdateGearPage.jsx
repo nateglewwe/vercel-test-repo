@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
 import EditableFeature from '../EditableFeature/EditableFeature';
+import EditableNote from '../EditableNote/EditableNote';
 
 function UpdateGearPage(props) {
 
@@ -13,10 +14,9 @@ function UpdateGearPage(props) {
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
                     gear.feature_5, gear.feature_6, gear.feature_7, gear.feature_8]
   const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} featureKey = {`feature_${index+1}`} key={index}/>)
-  
-  
   const notes = [gear.note_1, gear.note_2, gear.note_3, gear.note_4,
-                 gear.note_5, gear.note_6, gear.note_7, gear.note_8,]
+                 gear.note_5, gear.note_6, gear.note_7, gear.note_8]
+  const gearNotes = notes.map((note, index) => <EditableNote initialValue={note} noteKey = {`note_${index+1}`} key={index}/>)
   const { toolId } = useParams();
 
   useEffect(() => {
@@ -51,22 +51,10 @@ function UpdateGearPage(props) {
         <h4>Features:</h4>
         {gearFeatures}
       </div>
-      <input id="notesInput" placeholder="Notes" //onChange={'PUT A FUNCTION HERE?'}
-      />
-      <input type="button" value="Add Note" onClick={() => addNote()}  />
       <div>
-        {notes.map((note, index) => {
-          return(
-            <div key={index}>
-              {note && (<>
-                <span >{note}</span>
-                <input type="button" value="Edit" onClick={() => editNote()}  />
-                <input type="button" value="X" onClick={() => deleteNote()}  />
-              </>)}
-            </div>
-          )
-        })}
-      </div>
+        <h4>Notes:</h4>
+        {gearNotes}
+      </div><br />
       <input type="button" value="Finish Update" onClick={() => updateGear()}/>
       <input type="button" value="Cancel" onClick={() => cancelUpdate()}/> {/*NEEDS TO GO BACK TO GEAR LIST PAGE AND EMPTY REDUCERS/STATES THAT MIGHT HAVE BEEN FILLED DURING UPDATING*/}
       </>)}
