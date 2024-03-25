@@ -18,6 +18,7 @@ function EditableFeature ({initialValue, featureKey }) {
         if (isEditing === true) {
             //DISPATCH HERE WITH VALUE BEING EDITED, AND FEATUREKEY, AND TOOLID
             dispatch({ type: 'UPDATE_GEAR_FEATURE', payload: {feature: value, featureKey: featureKey, id: toolId} });
+            setValue('');
         }
         setIsEditing(!isEditing)
     }

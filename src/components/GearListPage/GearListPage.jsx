@@ -24,6 +24,11 @@ function GearListPage(props) {
     dispatch({ type: 'DELETE_GEAR', payload: toolId });
   }
 
+  const assignToEvent = (toolId, eventId) => {
+    //Dispatching event assignement for piece of gear to gear_list table in DB
+    dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: eventId}});
+  };
+
   return (
     <div>
       {gear.map(tool => {
@@ -47,7 +52,7 @@ function GearListPage(props) {
               <p>{tool.note_6}</p>
               <p>{tool.note_7}</p>
               <p>{tool.note_8}</p>
-              <select name="" id="">
+              <select name="" id="" onChange={(event) => assignToEvent(tool.id, event.target.value)}>
                 <option value="">Assign to event</option>
                 {events.map(event => {
                   return (

@@ -92,6 +92,19 @@ function* changeGearNote (action) {
     }
 }
 
+function* assignToEvent (action) {
+    try {
+        //Send toolID and eventID
+        yield axios.put(`/api/user/gearChangeNote/${action.payload.id}`, action.payload);
+
+        //Call fetchGearToUpdate saga to update the DOM after changing name IS THIS NOT NECESSARY FOR THIS SAGA??
+        yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('assignToEvent saga error:', err);
+    }
+}
+
 function* gearSaga() {
     yield takeLatest('FETCH_GEAR', fetchGear);
     yield takeLatest('DELETE_GEAR', deleteGear);
@@ -100,6 +113,7 @@ function* gearSaga() {
     yield takeLatest('CHANGE_GEAR_NAME', changeGearName);
     yield takeLatest('UPDATE_GEAR_FEATURE', changeGearFeature);
     yield takeLatest('UPDATE_GEAR_NOTE', changeGearNote);
+    yield takeLatest('ASSIGN_TO_EVENT', assignToEvent);
   }
   
   export default gearSaga;

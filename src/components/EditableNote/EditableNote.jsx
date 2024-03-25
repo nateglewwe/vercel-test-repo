@@ -16,6 +16,7 @@ function EditableNote ({initialValue, noteKey }) {
         if (isEditing === true) {
             //DISPATCH HERE WITH VALUE BEING EDITED, AND NOTEKEY, AND TOOLID
             dispatch({ type: 'UPDATE_GEAR_NOTE', payload: {note: value, noteKey: noteKey, id: toolId} });
+            setValue('');
         }
         setIsEditing(!isEditing)
     }

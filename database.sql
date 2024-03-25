@@ -119,5 +119,9 @@ VALUES
 '[2024-08-01, 2024-08-01]',
 'Remember IEC cables', 'He has everything else', null, null, null, null, null, null,
 'greg@gmail.com', null,
- 3, null, null, null, null, null, null, null,
- 1);
+3, null, null, null, null, null, null, null,
+1);
+
+--Add event_id column to gear_list table, after creating the event_list table because this references it
+ALTER TABLE "gear_list"
+ADD COLUMN "event_id" integer REFERENCES "event_list";
