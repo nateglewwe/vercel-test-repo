@@ -144,6 +144,10 @@ router.put('/gearChangeName/:id', (req, res) => {
 
 router.put('/gearChangeFeature/:id', (req, res) => {
   console.log('MADE IT TO SERVER SIDE', req.body);
+  if (['feature_1', 'feature_2', 'feature_3', 'feature_4',
+       'feature_5', 'feature_6', 'feature_7', 'feature_8'].indexOf(req.body.featureKey) !== -1) {
+
+  } else {}
   const queryText = `
   UPDATE "gear_list"
   SET ${req.body.featureKey} = $1

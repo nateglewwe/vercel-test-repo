@@ -49,11 +49,17 @@ function UpdateGearPage(props) {
       
       <h4>Name:</h4>
       {isEditing ?
-      <input id="nameInput" placeholder="Name" value={nameInput}
-        onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
+      <>
+        <input id="nameInput" placeholder="Name" value={nameInput}
+          onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
+        <button onClick={changeName}>Save</button>&nbsp;
+        <button onClick={() => setIsEditing(false)}>Cancel</button>
+      </>
       :
-      <span>{gear.name}</span>}&nbsp;
-      <input type="button" value={isEditing ? "Save" : "Edit"} onClick={changeName}  />
+      <>
+        <span>{gear.name}</span>&nbsp;
+        <button onClick={changeName}>Edit</button>
+      </>}
       <div>
         <h4>Features:</h4>
         {gearFeatures}
