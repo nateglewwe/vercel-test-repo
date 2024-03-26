@@ -56,7 +56,7 @@ function GearListPage(props) {
               <p>{tool.note_6}</p>
               <p>{tool.note_7}</p>
               <p>{tool.note_8}</p>
-              <select name="" id="" onChange={(event) => assignToEvent(tool.id, event.target.value)}>
+              <select name="" id="" value={tool.event_id} onChange={(event) => assignToEvent(tool.id, event.target.value)}>
                 <option value=''>Assign to event</option>
                 {events.map(event => {
                   return (
