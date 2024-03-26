@@ -62,8 +62,7 @@ function UpdateGearPage(props) {
         <h4>Notes:</h4>
         {gearNotes}
       </div><br />
-      <input type="button" value="Finish Update" onClick={() => updateGear()}/>
-      <input type="button" value="Cancel" onClick={() => cancelUpdate()}/> {/*NEEDS TO GO BACK TO GEAR LIST PAGE AND EMPTY REDUCERS/STATES THAT MIGHT HAVE BEEN FILLED DURING UPDATING*/}
+      <input type="button" value="Back to Gear List" onClick={() => history.push(`/gearlist`)}/>
       </>)}
     </div>
   );

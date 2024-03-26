@@ -11,7 +11,7 @@ function EditableFeature ({initialValue, featureKey }) {
     const { toolId } = useParams();
     console.log('THIS IS THE INITIAL VALUE:', initialValue);
 
-    const handleClick = (event) => {
+    const handleEdit = (event) => {
         if (event.key && event.key !== 'Enter'){
             return;
           }
@@ -29,11 +29,17 @@ function EditableFeature ({initialValue, featureKey }) {
             {initialValue && (
                 <div>
                     {isEditing ?
-                    <input type="text" value={value || ''} onChange={(event) => {setValue(event.target.value)}}
-                    onKeyDown={handleClick}/>
+                    <>
+                        <input type="text" value={value || ''} onChange={(event) => {setValue(event.target.value)}}
+                        onKeyDown={handleEdit}/>
+                        <button onClick={handleEdit}>Save</button>&nbsp;
+                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    </>
                     :
-                    <span>{initialValue}</span>}&nbsp;
-                    <button onClick={handleClick}>{isEditing ? "Save" : "Edit"}</button>
+                    <>
+                        <span>{initialValue}</span>&nbsp;
+                        <button onClick={handleEdit}>Edit</button>
+                    </>}
                 </div>
             )}
         </>
