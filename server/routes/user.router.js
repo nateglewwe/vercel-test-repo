@@ -143,12 +143,13 @@ router.put('/gearChangeName/:id', (req, res) => {
 });
 
 router.put('/gearChangeFeature/:id', (req, res) => {
+  console.log('MADE IT TO SERVER SIDE', req.body);
   const queryText = `
   UPDATE "gear_list"
-  SET $2 = $3
-  WHERE "gear_list".id = $1;
+  SET ${req.body.featureKey} = $1
+  WHERE "gear_list".id = $2;
   `;
-  const queryArgs = [req.params.id, req.body.featureKey, req.body.feature]
+  const queryArgs = [req.body.feature, req.params.id]
   pool.query(queryText, queryArgs)
   .then(result => {
     console.log('Gear with following ID has had feature changed to:', req.params.id, req.body.featureKey, req.body.feature);
