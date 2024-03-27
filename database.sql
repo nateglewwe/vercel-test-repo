@@ -125,3 +125,7 @@ VALUES
 --Add event_id column to gear_list table, after creating the event_list table because this references it
 ALTER TABLE "gear_list"
 ADD COLUMN "event_id" integer REFERENCES "event_list";
+
+--AWS Access Key and Secret Access Key
+--AKIA6GBMH4JIDXM5CGMS
+--yqv+ATKhDmTZXMwtvcsQsHaFuapOWJaB3kDGvxHS
