@@ -68,8 +68,8 @@ function* changeGearFeature (action) {
     try {
         //Send toolID, new feature value, and featureKey/feature column number
         console.log('THIS IS THE FEATURE PAYLOAD:', action.payload);
-        yield axios.put(`/api/user/gearChangeFeature/${action.payload.id}`, action.payload);
-
+        const changeGearFeature = yield axios.put(`/api/user/gearChangeFeature/${action.payload.id}`, action.payload);
+        console.log('ALERT MESSAGE', changeGearFeature.data.alert);
         //Call fetchGearToUpdate saga to update the DOM after changing name
         yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
     }
