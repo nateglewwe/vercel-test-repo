@@ -37,29 +37,19 @@ function GearListPage(props) {
     <div>
       <h1>Your Gear:</h1>
       {gear.map(tool => {
+        const features = [tool.feature_1, tool.feature_2, tool.feature_3, tool.feature_4,
+                          tool.feature_5, tool.feature_6, tool.feature_7, tool.feature_8];
+        const notes = [tool.note_1, tool.note_2, tool.note_3, tool.note_4,
+                       tool.note_5, tool.note_6, tool.note_7, tool.note_8];
           return (
             <div key={tool.id}>
               <p>{tool.photo}</p>
               <h4>Name:</h4>
               <p>{tool.name}</p>
               <h4>Features:</h4>
-              <span>{tool.feature_1}</span><br />
-              <span>{tool.feature_2}</span><br />
-              <span>{tool.feature_3}</span><br />
-              <span>{tool.feature_4}</span><br />
-              <span>{tool.feature_5}</span><br />
-              <span>{tool.feature_6}</span><br />
-              <span>{tool.feature_7}</span><br />
-              <span>{tool.feature_8}</span><br />
+              {features.map((feature, index) => {return(<div key={index}><span>{feature}</span></div> )})}
               <h4>Notes:</h4>
-              <span>{tool.note_1}</span><br />
-              <span>{tool.note_2}</span><br />
-              <span>{tool.note_3}</span><br />
-              <span>{tool.note_4}</span><br />
-              <span>{tool.note_5}</span><br />
-              <span>{tool.note_6}</span><br />
-              <span>{tool.note_7}</span><br />
-              <span>{tool.note_8}</span><br />
+              {notes.map((note, index) => {return(<div key={index}><span>{note}</span></div> )})}<br />
               <select name="" id="" value={tool.event_id || ''} onChange={(event) => assignToEvent(tool.id, event.target.value)}>
                 <option value=''>Assign to event</option>
                 {events.map(event => {
