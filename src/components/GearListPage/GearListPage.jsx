@@ -35,6 +35,7 @@ function GearListPage(props) {
 
   return (
     <div>
+      <h1>Your Gear:</h1>
       {gear.map(tool => {
           return (
             <div key={tool.id}>

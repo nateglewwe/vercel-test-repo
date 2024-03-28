@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 function EditableFeature ({initialValue, featureKey }) {
     const dispatch = useDispatch();
     let [isEditing, setIsEditing] = useState(false)
-    let [value, setValue] = useState(initialValue)
+    let [featureInputValue, setFeatureInputValue] = useState(initialValue)
     const { toolId } = useParams();
     console.log('THIS IS THE INITIAL VALUE:', initialValue);
 
@@ -17,8 +17,8 @@ function EditableFeature ({initialValue, featureKey }) {
           }
         if (isEditing === true) {
             //DISPATCH HERE WITH VALUE BEING EDITED, AND FEATUREKEY, AND TOOLID
-            dispatch({ type: 'UPDATE_GEAR_FEATURE', payload: {feature: value, featureKey: featureKey, id: toolId} });
-            setValue('');
+            dispatch({ type: 'UPDATE_GEAR_FEATURE', payload: {feature: featureInputValue, featureKey: featureKey, id: toolId} });
+            setFeatureInputValue('');
         }
         setIsEditing(!isEditing)
     }
@@ -26,12 +26,12 @@ function EditableFeature ({initialValue, featureKey }) {
 
     return (
         <>
-            {initialValue && (
+            {initialValue ? (
                 <div>
                     {isEditing ?
                     <>
-                        <input type="text" value={value || ''} onChange={(event) => {setValue(event.target.value)}}
-                        onKeyDown={handleEdit}/>
+                        <input type="text" value={featureInputValue || ''} onChange={(event) => {setFeatureInputValue(event.target.value)}}
+                        onKeyDown={handleEdit} placeholder="Feature"/>
                         <button onClick={handleEdit}>Save</button>&nbsp;
                         <button onClick={() => setIsEditing(false)}>Cancel</button>
                     </>
@@ -40,6 +40,13 @@ function EditableFeature ({initialValue, featureKey }) {
                         <span>{initialValue}</span>&nbsp;
                         <button onClick={handleEdit}>Edit</button>
                     </>}
+                </div>
+            )
+            :
+            (
+                <div>
+                    <input type="text" placeholder="Feature"/>
+                    <button onClick={handleEdit}>Add</button>
                 </div>
             )}
         </>

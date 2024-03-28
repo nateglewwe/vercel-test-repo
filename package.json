@@ -6,6 +6,7 @@
     "node": "18.x"
   },
   "dependencies": {
+    "aws-sdk": "^2.1587.0",
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",

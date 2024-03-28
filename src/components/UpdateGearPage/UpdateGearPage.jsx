@@ -8,10 +8,10 @@ import EditableNote from '../EditableNote/EditableNote';
 function UpdateGearPage(props) {
 
   const dispatch = useDispatch();
-  const [nameInput, setNameInput] = useState('');
-  let [isEditing, setIsEditing] = useState(false)
   const history = useHistory();
   const gear = useSelector((store) => store.gear.gearToUpdate);
+  const [nameInput, setNameInput] = useState(gear.name);
+  let [isEditing, setIsEditing] = useState(false)
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
                     gear.feature_5, gear.feature_6, gear.feature_7, gear.feature_8]
   const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} featureKey = {`feature_${index+1}`} key={index}/>)
@@ -43,6 +43,7 @@ function UpdateGearPage(props) {
 
   return (
     <div>
+      <h1>Update This Gear:</h1>
       {gear && (<>
       <p>{gear.photo}</p>
       <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />

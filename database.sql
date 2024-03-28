@@ -126,6 +126,3 @@ VALUES
 ALTER TABLE "gear_list"
 ADD COLUMN "event_id" integer REFERENCES "event_list";
 
---AWS Access Key and Secret Access Key
---AKIA6GBMH4JIDXM5CGMS
---yqv+ATKhDmTZXMwtvcsQsHaFuapOWJaB3kDGvxHS

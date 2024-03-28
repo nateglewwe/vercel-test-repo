@@ -146,32 +146,35 @@ router.put('/gearChangeFeature/:id', (req, res) => {
   console.log('MADE IT TO SERVER SIDE', req.body);
   if (['feature_1', 'feature_2', 'feature_3', 'feature_4',
        'feature_5', 'feature_6', 'feature_7', 'feature_8'].indexOf(req.body.featureKey) !== -1) {
-        console.log('WERE IN THE IF STATEMENT');
         const queryText = `
         UPDATE "gear_list"
         SET ${req.body.featureKey} = $1
         WHERE "gear_list".id = $2;
         `;
-    const queryArgs = [req.body.feature, req.params.id]
-    pool.query(queryText, queryArgs)
-    .then(result => {
-      console.log('Gear with following ID has had feature changed to:', req.params.id, req.body.featureKey, req.body.feature);
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      console.log('ERROR in changing gear feature server route:', err);
-      res.sendStatus(500);
-    });
+        const queryArgs = [req.body.feature, req.params.id]
+        pool.query(queryText, queryArgs)
+        .then(result => {
+          console.log('Gear with following ID has had feature changed to:', req.params.id, req.body.featureKey, req.body.feature);
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log('ERROR in changing gear feature server route:', err);
+          res.sendStatus(500);
+        });
   } else {console.log('DID NOT PASS THE SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
 });
 
 router.put('/gearChangeNote/:id', (req, res) => {
+  if (['note_1', 'note_2', 'note_3', 'note_4',
+       'note_5', 'note_6', 'note_7', 'note_8'].indexOf(req.body.noteKey) !== -1) {
+
+
   const queryText = `
   UPDATE "gear_list"
-  SET $2 = $3
+  SET ${req.body.noteKey} = $2
   WHERE "gear_list".id = $1;
   `;
-  const queryArgs = [req.params.id, req.body.noteKey, req.body.note]
+  const queryArgs = [req.params.id, req.body.note]
   pool.query(queryText, queryArgs)
   .then(result => {
     console.log('Gear with following ID has had note changed to:', req.params.id, req.body.featureKey, req.body.feature);
@@ -181,6 +184,7 @@ router.put('/gearChangeNote/:id', (req, res) => {
     console.log('ERROR in changing gear note server route:', err);
     res.sendStatus(500);
   });
+} else {console.log('DID NOT PASS THE SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
 });
 
 router.put('/gearAssignEvent/:id', (req, res) => {
