@@ -33,6 +33,10 @@ function EditableFeature ({initialValue, featureKey }) {
         setAddFeatureValue('');
     }
 
+    const handleDeleteFeature = () => {
+        //DISPATCH HERE WITH VALUE BEING UPDATED TO NULL, AND FEATUREKEY, AND TOOLID
+        dispatch({ type: 'UPDATE_GEAR_FEATURE', payload: {feature: null, featureKey: featureKey, id: toolId} });
+    }
 
     return (
         <>
@@ -48,7 +52,8 @@ function EditableFeature ({initialValue, featureKey }) {
                     :
                     <>
                         <span>{initialValue}</span>&nbsp;
-                        <button onClick={handleEdit}>Edit</button>
+                        <button onClick={handleEdit}>Edit</button>&nbsp;
+                        <button onClick={handleDeleteFeature}>Delete</button>
                     </>}
                 </div>
             )

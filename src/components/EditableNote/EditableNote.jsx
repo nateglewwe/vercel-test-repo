@@ -6,6 +6,7 @@ function EditableNote ({initialValue, noteKey }) {
     const dispatch = useDispatch();
     let [isEditing, setIsEditing] = useState(false)
     let [noteInputValue, setNoteInputValue] = useState(initialValue)
+    let [addNoteValue, setAddNoteValue] = useState()
     const { toolId } = useParams();
     console.log('THIS IS THE INITIAL VALUE:', initialValue);
 
@@ -19,6 +20,20 @@ function EditableNote ({initialValue, noteKey }) {
             setNoteInputValue('');
         }
         setIsEditing(!isEditing)
+    }
+
+    const handleAddNote = (event) => {
+        if (event.key && event.key !== 'Enter'){
+            return;
+          }
+        //DISPATCH HERE WITH VALUE BEING ADDED, AND NOTEKEY, AND TOOLID
+        dispatch({ type: 'UPDATE_GEAR_NOTE', payload: {note: addNoteValue, noteKey: noteKey, id: toolId} });
+        setAddNoteValue('');
+    }
+
+    const handleDeleteNote = () => {
+        //DISPATCH HERE WITH VALUE BEING UPDATED TO NULL, AND NOTEKEY, AND TOOLID
+        dispatch({ type: 'UPDATE_GEAR_NOTE', payload: {note: null, noteKey: noteKey, id: toolId} });
     }
 
     return (
@@ -35,14 +50,17 @@ function EditableNote ({initialValue, noteKey }) {
                     :
                     <>
                         <span>{initialValue}</span>&nbsp;
-                        <button onClick={handleEdit}>Edit</button>
+                        <button onClick={handleEdit}>Edit</button>&nbsp;
+                        <button onClick={handleDeleteNote}>Delete</button>
                     </>}
                 </div>
             )
             :
             (
                 <div>
-                    <input type="text" placeholder="Note"/>
+                    <input type="text" value={addNoteValue || ''} onChange={(event) => {setAddNoteValue(event.target.value)}}
+                        onKeyDown={handleAddNote} placeholder="Note"/>
+                    <button onClick={handleAddNote}>Add</button>
                 </div>
             )}
         </>
