@@ -40,23 +40,26 @@ function GearListPage(props) {
           return (
             <div key={tool.id}>
               <p>{tool.photo}</p>
+              <h4>Name:</h4>
               <p>{tool.name}</p>
-              <p>{tool.feature_1}</p>
-              <p>{tool.feature_2}</p>
-              <p>{tool.feature_3}</p>
-              <p>{tool.feature_4}</p>
-              <p>{tool.feature_5}</p>
-              <p>{tool.feature_6}</p>
-              <p>{tool.feature_7}</p>
-              <p>{tool.feature_8}</p>
-              <p>{tool.note_1}</p>
-              <p>{tool.note_2}</p>
-              <p>{tool.note_3}</p>
-              <p>{tool.note_4}</p>
-              <p>{tool.note_5}</p>
-              <p>{tool.note_6}</p>
-              <p>{tool.note_7}</p>
-              <p>{tool.note_8}</p>
+              <h4>Features:</h4>
+              <span>{tool.feature_1}</span><br />
+              <span>{tool.feature_2}</span><br />
+              <span>{tool.feature_3}</span><br />
+              <span>{tool.feature_4}</span><br />
+              <span>{tool.feature_5}</span><br />
+              <span>{tool.feature_6}</span><br />
+              <span>{tool.feature_7}</span><br />
+              <span>{tool.feature_8}</span><br />
+              <h4>Notes:</h4>
+              <span>{tool.note_1}</span><br />
+              <span>{tool.note_2}</span><br />
+              <span>{tool.note_3}</span><br />
+              <span>{tool.note_4}</span><br />
+              <span>{tool.note_5}</span><br />
+              <span>{tool.note_6}</span><br />
+              <span>{tool.note_7}</span><br />
+              <span>{tool.note_8}</span><br />
               <select name="" id="" value={tool.event_id || ''} onChange={(event) => assignToEvent(tool.id, event.target.value)}>
                 <option value=''>Assign to event</option>
                 {events.map(event => {

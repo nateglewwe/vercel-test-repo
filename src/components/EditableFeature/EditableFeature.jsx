@@ -8,6 +8,7 @@ function EditableFeature ({initialValue, featureKey }) {
     const dispatch = useDispatch();
     let [isEditing, setIsEditing] = useState(false)
     let [featureInputValue, setFeatureInputValue] = useState(initialValue)
+    let [addFeatureValue, setAddFeatureValue] = useState()
     const { toolId } = useParams();
     console.log('THIS IS THE INITIAL VALUE:', initialValue);
 
@@ -21,6 +22,15 @@ function EditableFeature ({initialValue, featureKey }) {
             setFeatureInputValue('');
         }
         setIsEditing(!isEditing)
+    }
+
+    const handleAddFeature = (event) => {
+        if (event.key && event.key !== 'Enter'){
+            return;
+          }
+        //DISPATCH HERE WITH VALUE BEING ADDED, AND FEATUREKEY, AND TOOLID
+        dispatch({ type: 'UPDATE_GEAR_FEATURE', payload: {feature: addFeatureValue, featureKey: featureKey, id: toolId} });
+        setAddFeatureValue('');
     }
 
 
@@ -45,8 +55,9 @@ function EditableFeature ({initialValue, featureKey }) {
             :
             (
                 <div>
-                    <input type="text" placeholder="Feature"/>
-                    <button onClick={handleEdit}>Add</button>
+                    <input type="text" value={addFeatureValue || ''} onChange={(event) => {setAddFeatureValue(event.target.value)}}
+                        onKeyDown={handleAddFeature} placeholder="Add Feature"/>
+                    <button onClick={handleAddFeature}>Add</button>
                 </div>
             )}
         </>
