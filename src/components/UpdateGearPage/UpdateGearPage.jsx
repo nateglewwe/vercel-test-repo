@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import EditableFeature from '../EditableFeature/EditableFeature';
 import EditableNote from '../EditableNote/EditableNote';
@@ -60,7 +61,7 @@ function UpdateGearPage(props) {
     const fileName = encodeURIComponent(selectedFile.name);
     const formData = new FormData();
     formData.append ('image', selectedFile);
-    axios.post(`api/user/image?imageName=${fileName}`, formData)
+    axios.post(`api/user/photo?photoName=${fileName}`, formData)
     .then (response => {
       console.log('Success!');
     }) .catch (err => {

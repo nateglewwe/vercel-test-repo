@@ -215,14 +215,14 @@ router.put('/gearAssignEvent/:id', (req, res) => {
 router.post('/photo', async (req, res) => {
   try{
     const {photoName} = req.query;
-    const {photoData} = req.files.image.data;
+    const photoData = req.files.image.data;
   
     const uploadedFile = await s3Client.upload({
       Bucket: 'freelancersgearschedulerbucket',
       Key: `gearphotos/${photoName}`, // folder/file
-      Body: photoData, // image data to upload
+      Body: photoData, // photo data to upload
       // ACL: 'private'
-    });
+    }).promise();
     //URL where the file can be accessed, might need ID for private read? See Chris' video at 50 min mark
     console.log('URL WHERE FILE WAS UPLOADED?', uploadedFile.Location);
   
