@@ -127,5 +127,5 @@ Customize this ReadMe and the code comments in this project to read less like a 
 ## Notes from Nathaniel:
 - Used npm install aws-sdk for S3 photo storage
 - Used npm install express-fileupload in order to upload files with AWS S3
-- Used file resizer thing
+- Used npm install browser-image-resizer
 

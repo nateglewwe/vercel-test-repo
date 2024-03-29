@@ -219,7 +219,7 @@ router.post('/photo', async (req, res) => {
   
     const uploadedFile = await s3Client.upload({
       Bucket: 'freelancersgearschedulerbucket',
-      Key: `gearphotos/${photoName}`, // folder/file
+      Key: `gearphotos/${req.user.id}/${photoName}`, // bucketfolder/userIDfolder/file, MIGHT ADD TIMESTAMP HERE LATER, SEE CHRIS' VIDEO AT 1:20 MIN MARK
       Body: photoData, // photo data to upload
       // ACL: 'private'
     }).promise();

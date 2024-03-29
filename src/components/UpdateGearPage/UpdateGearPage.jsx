@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { readAndCompressImage } from 'browser-image-resizer';
 
 import EditableFeature from '../EditableFeature/EditableFeature';
 import EditableNote from '../EditableNote/EditableNote';
@@ -13,7 +14,13 @@ function UpdateGearPage(props) {
   const gear = useSelector((store) => store.gear.gearToUpdate);
   const [nameInput, setNameInput] = useState(gear.name);
   let [isEditing, setIsEditing] = useState(false);
-  const [selectedFile, setSelectedFile] = useState();
+
+  const [fileName, setFileName] = useState('');  // Selected image file name
+  const [fileType, setFileType] = useState('');  // Selected file type
+  const [selectedFile, setSelectedFile] = useState();  //Selected image file
+  const [imagePreview, setImagePreview] = useState();  // Selected image preview
+  const [imageList, setImageList] = useState([]);  // Used to display uploaded images on the page
+  
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
                     gear.feature_5, gear.feature_6, gear.feature_7, gear.feature_8]
   const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} featureKey = {`feature_${index+1}`} key={index}/>)
@@ -47,13 +54,24 @@ function UpdateGearPage(props) {
     //TODO: Resize image
 
     const fileToUpload = event.target.files[0];
+    const copyFile = new Blob([fileToUpload], { type: fileToUpload.type, name: fileToUpload.name });
+    const resizedFile = await readAndCompressImage(copyFile, {
+      quality: 1.0,    // 100% quality
+      maxHeight: 300, // max height of the image
+    });
     const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
     // Check if the file is one of the allowed types.
     if (acceptedImageTypes.includes(fileToUpload.type)) {
-      setSelectedFile(fileToUpload);
+      // Resizing the image removes the name, store it in a separate variable
+      setFileName(encodeURIComponent(fileToUpload.name));
+      setFileType(encodeURIComponent(fileToUpload.type));
+      // Save the resized file
+      setSelectedFile(resizedFile);
+      // Create a URL that can be used in an img tag for previewing the image
+      setImagePreview(URL.createObjectURL(resizedFile));
     } else {
       alert('Please select an image');
-    } 
+    }
   }
 
   const sendPhotoToServer = (event) => {
