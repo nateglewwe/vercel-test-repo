@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 5001;
+const fileUpload = require('express-fileupload');
 
 // Middleware Includes
 const sessionMiddleware = require('./modules/session-middleware');
@@ -14,6 +15,7 @@ const userRouter = require('./routes/user.router');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('build'));
+app.use(fileUpload()); //Used for accepting file uploads
 
 // Passport Session Configuration
 app.use(sessionMiddleware);

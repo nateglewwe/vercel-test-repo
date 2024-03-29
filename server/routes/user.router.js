@@ -5,6 +5,13 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const aws = require('aws-sdk');
+
+const s3Client = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
 
 const router = express.Router();
 
@@ -203,6 +210,29 @@ router.put('/gearAssignEvent/:id', (req, res) => {
     console.log('ERROR in assigning gear to event server route:', err);
     res.sendStatus(500);
   });
+});
+
+router.post('/photo', async (req, res) => {
+  try{
+    const {photoName} = req.query;
+    const {photoData} = req.files.image.data;
+  
+    const uploadedFile = await s3Client.upload({
+      Bucket: 'freelancersgearschedulerbucket',
+      Key: `gearphotos/${photoName}`, // folder/file
+      Body: photoData, // image data to upload
+      // ACL: 'private'
+    });
+    //URL where the file can be accessed, might need ID for private read? See Chris' video at 50 min mark
+    console.log('URL WHERE FILE WAS UPLOADED?', uploadedFile.Location);
+  
+    //TODO: put URL in database!
+  
+    res.sendStatus(201);
+  } catch (err) {
+      console.log('Error in S3 photo server side POST router', err)
+      res.sendStatus(500);
+  }
 });
 
 router.get('/events', (req, res) => {

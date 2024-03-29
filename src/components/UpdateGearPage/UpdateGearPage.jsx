@@ -11,7 +11,8 @@ function UpdateGearPage(props) {
   const history = useHistory();
   const gear = useSelector((store) => store.gear.gearToUpdate);
   const [nameInput, setNameInput] = useState(gear.name);
-  let [isEditing, setIsEditing] = useState(false)
+  let [isEditing, setIsEditing] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
                     gear.feature_5, gear.feature_6, gear.feature_7, gear.feature_8]
   const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} featureKey = {`feature_${index+1}`} key={index}/>)
@@ -41,11 +42,42 @@ function UpdateGearPage(props) {
     setIsEditing(!isEditing)
   }
 
+  const onFileChange = async (event) => {
+    //TODO: Resize image
+
+    const fileToUpload = event.target.files[0];
+    const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    // Check if the file is one of the allowed types.
+    if (acceptedImageTypes.includes(fileToUpload.type)) {
+      setSelectedFile(fileToUpload);
+    } else {
+      alert('Please select an image');
+    } 
+  }
+
+  const sendPhotoToServer = (event) => {
+    event.preventDefault();
+    const fileName = encodeURIComponent(selectedFile.name);
+    const formData = new FormData();
+    formData.append ('image', selectedFile);
+    axios.post(`api/user/image?imageName=${fileName}`, formData)
+    .then (response => {
+      console.log('Success!');
+    }) .catch (err => {
+      console.log('Error in onSubmit image axios post', err);
+      alert('Something went wrong oh no');
+    })
+  }
+
   return (
     <div>
       <h1>Update This Gear:</h1>
       {gear && (<>
       <p>{gear.photo}</p>
+      <form onSubmit={sendPhotoToServer}>
+        <input type="file" accept="image/*" onChange={onFileChange} />
+        <button type="submit">Submit</button>
+      </form>
       <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />
       
       <h4>Name:</h4>
