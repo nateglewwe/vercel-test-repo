@@ -212,6 +212,21 @@ router.put('/gearAssignEvent/:id', (req, res) => {
   });
 });
 
+// router.get('/:photoName', async (req, res) => { //NEED TO FINISH THIS TO GET PHOTOS ON DOM, AND MAKE SAGA AND GEAR PHOTO REDUCER
+//   try {
+//       const { photoName } = req.params;
+//       const command = new GetObjectCommand({
+//           Bucket: process.env.AWS_BUCKET,
+//           Key: `images/${imageName}`, // folder/file 
+//       });
+//       const data = await s3Client.send(command);
+//       data.Body.pipe(res);
+//   } catch (error) {
+//       console.log(error)
+//       res.sendStatus(500);
+//   }
+// });
+
 router.post('/photo', async (req, res) => {
   try{
     const {photoName, toolId} = req.query;

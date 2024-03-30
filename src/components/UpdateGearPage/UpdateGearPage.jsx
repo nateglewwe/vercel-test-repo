@@ -52,7 +52,6 @@ function UpdateGearPage(props) {
   }
 
   const onFileChange = async (event) => {
-    //TODO: Resize image
 
     const fileToUpload = event.target.files[0];
     const copyFile = new Blob([fileToUpload], { type: fileToUpload.type, name: fileToUpload.name });
@@ -112,7 +111,7 @@ function UpdateGearPage(props) {
     <div>
       <h1>Update This Gear:</h1>
       {gear && (<>
-      <p>{gear.photo}</p>
+      <img src={gear.photo} alt={`Photo of ${gear.name}`} />
       <form onSubmit={sendPhotoToServer}>
         <input type="file" accept="image/*" onChange={onFileChange} />
         <button type="submit">Submit</button>
