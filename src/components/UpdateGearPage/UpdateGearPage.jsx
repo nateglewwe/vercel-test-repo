@@ -31,7 +31,7 @@ function UpdateGearPage(props) {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: toolId });
-    getImages();
+    //getImages(); FINISH THIS---------------------------------------------------------------
   }, []);
 
   function deletePhoto (toolName) {
@@ -80,12 +80,12 @@ function UpdateGearPage(props) {
     //const fileName = encodeURIComponent(selectedFile.name); DON'T NEED THIS ANYMORE?
     const formData = new FormData();
     formData.append ('image', selectedFile);
-    axios.post(`api/user/photo?photoName=${fileName}&photoType=${fileType}`, formData)
+    axios.post(`api/user/photo?photoName=${fileName}&toolId=${toolId}`, formData)
     .then (response => {
       console.log('Success!');
       alert('Success!');
       clearForm();
-      getImages();
+      //getImages(); FINISH THIS!!!!!--------------------------------------------
     }) .catch (err => {
       console.log('Error in onSubmit image axios post', err);
       alert('Something went wrong oh no');
@@ -99,14 +99,14 @@ function UpdateGearPage(props) {
     setImagePreview(undefined);
   }
 
-  const getImages = () => { //FINISH THIS!!! MAKE SERVER SIDE--------------------------------------
-    axios.get('/api/user/photos').then(response => {
-      setImageList(response.data);
-    }).catch(error => {
-      console.log('error', error);
-      alert('Something went wrong');
-    });
-  }
+  // const getImages = () => { //FINISH THIS!!! MAKE SERVER SIDE--------------------------------------
+  //   axios.get('/api/user/photos').then(response => {
+  //     setImageList(response.data);
+  //   }).catch(error => {
+  //     console.log('error', error);
+  //     alert('Something went wrong');
+  //   });
+  // }
 
   return (
     <div>

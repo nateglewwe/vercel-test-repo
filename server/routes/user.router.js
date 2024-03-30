@@ -214,7 +214,7 @@ router.put('/gearAssignEvent/:id', (req, res) => {
 
 router.post('/photo', async (req, res) => {
   try{
-    const {photoName} = req.query;
+    const {photoName, toolId} = req.query;
     const photoData = req.files.image.data;
   
     const uploadedFile = await s3Client.upload({
@@ -226,8 +226,13 @@ router.post('/photo', async (req, res) => {
     //URL where the file can be accessed, might need ID for private read? See Chris' video at 50 min mark
     console.log('URL WHERE FILE WAS UPLOADED?', uploadedFile.Location);
   
-    //TODO: put URL in database!
-  
+    //Put URL in database:
+    await pool.query(`
+      UPDATE "gear_list"
+      SET photo = $2
+      WHERE "gear_list".id = $1;
+      `, [toolId, uploadedFile.Location]);
+    //Send OK back to client side
     res.sendStatus(201);
   } catch (err) {
       console.log('Error in S3 photo server side POST router', err)
