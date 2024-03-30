@@ -20,7 +20,7 @@ function UpdateGearPage(props) {
   const [selectedFile, setSelectedFile] = useState();  //Selected image file
   const [imagePreview, setImagePreview] = useState();  // Selected image preview
   const [imageList, setImageList] = useState([]);  // Used to display uploaded images on the page
-  
+
   const features = [gear.feature_1, gear.feature_2, gear.feature_3, gear.feature_4,
                     gear.feature_5, gear.feature_6, gear.feature_7, gear.feature_8]
   const gearFeatures = features.map((feature, index) => <EditableFeature initialValue={feature} featureKey = {`feature_${index+1}`} key={index}/>)
@@ -31,6 +31,7 @@ function UpdateGearPage(props) {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: toolId });
+    getImages();
   }, []);
 
   function deletePhoto (toolName) {
@@ -76,16 +77,35 @@ function UpdateGearPage(props) {
 
   const sendPhotoToServer = (event) => {
     event.preventDefault();
-    const fileName = encodeURIComponent(selectedFile.name);
+    //const fileName = encodeURIComponent(selectedFile.name); DON'T NEED THIS ANYMORE?
     const formData = new FormData();
     formData.append ('image', selectedFile);
-    axios.post(`api/user/photo?photoName=${fileName}`, formData)
+    axios.post(`api/user/photo?photoName=${fileName}&photoType=${fileType}`, formData)
     .then (response => {
       console.log('Success!');
+      alert('Success!');
+      clearForm();
+      getImages();
     }) .catch (err => {
       console.log('Error in onSubmit image axios post', err);
       alert('Something went wrong oh no');
     })
+  }
+
+  const clearForm = () => {
+    setFileName('');
+    setFileType('');
+    setSelectedFile(undefined);
+    setImagePreview(undefined);
+  }
+
+  const getImages = () => { //FINISH THIS!!! MAKE SERVER SIDE--------------------------------------
+    axios.get('/api/user/photos').then(response => {
+      setImageList(response.data);
+    }).catch(error => {
+      console.log('error', error);
+      alert('Something went wrong');
+    });
   }
 
   return (
