@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {useSelector} from 'react-redux';
 import { readAndCompressImage } from 'browser-image-resizer';
 
+import FeatureInput from '../FeatureInput/FeatureInput';
+
+
 function AddGearPage(props) {
 
   const store = useSelector((store) => store);
@@ -12,8 +15,27 @@ function AddGearPage(props) {
   const [imagePreview, setImagePreview] = useState();  // Selected image preview
   const [imageList, setImageList] = useState([]);  // Used to display uploaded images on the page
 
-  const onFileChange = async (event) => {
+  const [nameInput, setNameInput] = useState('');  //Stores name of gear to be added
+  const [feature1Input, setFeature1Input] = useState('');  //Stores value of feature
+  const [feature2Input, setFeature2Input] = useState('');
+  const [feature3Input, setFeature3Input] = useState('');
+  const [feature4Input, setFeature4Input] = useState('');
+  const [feature5Input, setFeature5Input] = useState('');
+  const [feature6Input, setFeature6Input] = useState('');
+  const [feature7Input, setFeature7Input] = useState('');
+  const [feature8Input, setFeature8Input] = useState('');
+  const [note1Input, setNote1Input] = useState('');  //Stores value of note
+  const [note2Input, setNote2Input] = useState('');
+  const [note3Input, setNote3Input] = useState('');
+  const [note4Input, setNote4Input] = useState('');
+  const [note5Input, setNote5Input] = useState('');
+  const [note6Input, setNote6Input] = useState('');
+  const [note7Input, setNote7Input] = useState('');
+  const [note8Input, setNote8Input] = useState('');
 
+
+
+  const onFileChange = async (event) => {
     const fileToUpload = event.target.files[0];
     const copyFile = new Blob([fileToUpload], { type: fileToUpload.type, name: fileToUpload.name });
     const resizedFile = await readAndCompressImage(copyFile, {
@@ -35,6 +57,18 @@ function AddGearPage(props) {
     }
   }
 
+  const deletePhoto = () => {
+    setFileName('');
+    setFileType('');
+    setSelectedFile();
+    setImagePreview();
+    document.getElementById('fileUploader').value= null;
+  }
+
+  const addGearToList = () => {
+    console.log();
+  }
+
   return (
     <div>
       <h1>Add Gear:</h1>
@@ -43,7 +77,21 @@ function AddGearPage(props) {
       :
         <p>Add a photo to display preview here</p>
       }<br />
-      <input type="file" accept="image/*" onChange={onFileChange} />
+      <input type="file" accept="image/*" id="fileUploader"onChange={onFileChange} />
+      <input type="button" value="Delete Photo" onClick={() => deletePhoto()}/><br />
+      <h4>Name:</h4>
+      <input id="nameInput" placeholder="Name" value={nameInput}
+          onChange={(event) => {setNameInput(event.target.value)}} />
+      <h4>Features:</h4>
+      <input id="feature1Input" placeholder="Feature 1" value={feature1Input}
+          onChange={(event) => {setFeature1Input(event.target.value)}} /><br />
+
+      <form onSubmit={addGearToList}>
+        <FeatureInput /><br />
+        <FeatureInput /><br />
+        <FeatureInput /><br />
+      <button type="submit">Add Gear</button>
+      </form>
       
 
     </div>

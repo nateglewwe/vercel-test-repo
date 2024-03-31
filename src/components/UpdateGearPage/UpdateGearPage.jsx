@@ -117,7 +117,6 @@ function UpdateGearPage(props) {
         <button type="submit">Submit</button>
       </form>
       <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />
-      
       <h4>Name:</h4>
       {isEditing ?
       <>
