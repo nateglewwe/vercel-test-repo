@@ -6,7 +6,7 @@
     "node": "18.x"
   },
   "dependencies": {
-    "aws-sdk": "^2.1587.0",
+    "@aws-sdk/client-s3": "^3.540.0",
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "browser-image-resizer": "^2.4.1",

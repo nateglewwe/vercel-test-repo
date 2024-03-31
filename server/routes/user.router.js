@@ -212,41 +212,45 @@ router.put('/gearAssignEvent/:id', (req, res) => {
   });
 });
 
-// router.get('/:photoName', async (req, res) => { //NEED TO FINISH THIS TO GET PHOTOS ON DOM, AND MAKE SAGA AND GEAR PHOTO REDUCER
-//   try {
-//       const { photoName } = req.params;
-//       const command = new GetObjectCommand({
-//           Bucket: process.env.AWS_BUCKET,
-//           Key: `images/${imageName}`, // folder/file 
-//       });
-//       const data = await s3Client.send(command);
-//       data.Body.pipe(res);
-//   } catch (error) {
-//       console.log(error)
-//       res.sendStatus(500);
-//   }
-// });
+router.post('/photoName', async (req, res) => { //USING THIS AS A GET ROUTE, NEED TO FINISH THIS TO GET PHOTOS ON DOM, AND MAKE SAGA AND GEAR PHOTO REDUCER
+  try {
+const myBucket = process.env.AWS_BUCKET; //BUCKET_NAME
+const myKey = req.body.photoName; // FILE_NAME
+const signedUrlExpireSeconds = 60 * 5; //EXPIRATION
+
+const presignedURL = s3Client.getSignedUrl("putObject", {
+  Bucket: myBucket,
+  Key: myKey,
+  Expires: signedUrlExpireSeconds,
+});
+  console.log(presignedURL);
+      res.send(presignedURL)
+  } catch (error) {
+      console.log(error)
+      res.sendStatus(500);
+  }
+});
 
 router.post('/photo', async (req, res) => {
   try{
     const {photoName, toolId} = req.query;
     const photoData = req.files.image.data;
   
-    const uploadedFile = await s3Client.upload({
+    const uploadedFileURL = await s3Client.send( new PutObjectCommand({
       Bucket: 'freelancersgearschedulerbucket',
       Key: `gearphotos/${req.user.id}/${photoName}`, // bucketfolder/userIDfolder/file, MIGHT ADD TIMESTAMP HERE LATER, SEE CHRIS' VIDEO AT 1:20 MIN MARK
       Body: photoData, // photo data to upload
       // ACL: 'private'
-    }).promise();
+    }));
     //URL where the file can be accessed, might need ID for private read? See Chris' video at 50 min mark
-    console.log('URL WHERE FILE WAS UPLOADED?', uploadedFile.Location);
+    console.log('URL WHERE FILE WAS UPLOADED', uploadedFileURL);
   
     //Put URL in database:
     await pool.query(`
       UPDATE "gear_list"
       SET photo = $2
       WHERE "gear_list".id = $1;
-      `, [toolId, uploadedFile.Location]);
+      `, [toolId, uploadedFileURL]);
     //Send OK back to client side
     res.sendStatus(201);
   } catch (err) {
