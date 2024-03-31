@@ -31,7 +31,7 @@ function UpdateGearPage(props) {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: toolId });
-    //getImages(); FINISH THIS---------------------------------------------------------------
+    getPhoto(); //I THINK THIS IS DONE??---------------------------------------------------------------
   }, []);
 
   function deletePhoto (toolName) {
@@ -84,7 +84,7 @@ function UpdateGearPage(props) {
       console.log('Success!');
       alert('Success!');
       clearForm();
-      //getImages(); FINISH THIS!!!!!--------------------------------------------
+      getPhoto(); //I THINK THIS IS DONE??!--------------------------------------------
     }) .catch (err => {
       console.log('Error in onSubmit image axios post', err);
       alert('Something went wrong oh no');
@@ -98,20 +98,22 @@ function UpdateGearPage(props) {
     setImagePreview(undefined);
   }
 
-  // const getImages = () => { //FINISH THIS!!! MAKE SERVER SIDE--------------------------------------
-  //   axios.get('/api/user/photos').then(response => {
-  //     setImageList(response.data);
-  //   }).catch(error => {
-  //     console.log('error', error);
-  //     alert('Something went wrong');
-  //   });
-  // }
+  const getPhoto = () => { //I THINK I'M DONE WITH THIS??--------------------------------------
+    axios.get(`/api/user/photo/https://freelancersgearschedulerbucket.s3.us-east-2.amazonaws.com/gearphotos/2/Midas%20MR18.jpg`)
+    // console.log(gear.photo) //USED FOR DEBUGGING
+    .then(response => {
+      setImageList(response.data);
+    }).catch(error => {
+      console.log('error', error);
+      alert('Something went wrong');
+    });
+  }
 
   return (
     <div>
       <h1>Update This Gear:</h1>
       {gear && (<>
-      <img src={gear.photo} alt={`Photo of ${gear.name}`} />
+      <img src={imageList} alt={`Photo of ${gear.name}`} />
       <form onSubmit={sendPhotoToServer}>
         <input type="file" accept="image/*" onChange={onFileChange} />
         <button type="submit">Submit</button>

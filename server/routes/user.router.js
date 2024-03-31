@@ -5,9 +5,10 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-const aws = require('aws-sdk');
+const {GetObjectCommand, PutObjectCommand, S3Client} = require('@aws-sdk/client-s3');
 
-const s3Client = new aws.S3({
+
+const s3Client = new S3Client({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_REGION,
@@ -212,19 +213,17 @@ router.put('/gearAssignEvent/:id', (req, res) => {
   });
 });
 
-router.post('/photoName', async (req, res) => { //USING THIS AS A GET ROUTE, NEED TO FINISH THIS TO GET PHOTOS ON DOM, AND MAKE SAGA AND GEAR PHOTO REDUCER
+router.get('/photo/:photoName', async (req, res) => { //NEED TO FINISH THIS, MAKE SAGA AND GEAR PHOTO REDUCER??
   try {
 const myBucket = process.env.AWS_BUCKET; //BUCKET_NAME
-const myKey = req.body.photoName; // FILE_NAME
-const signedUrlExpireSeconds = 60 * 5; //EXPIRATION
+const myKey = `gearphotos/${req.user.id}/${req.params.photoName}`; // bucketfolder/userIDfolder/file
 
-const presignedURL = s3Client.getSignedUrl("putObject", {
+const photoURL = await s3Client.send(new GetObjectCommand ({
   Bucket: myBucket,
   Key: myKey,
-  Expires: signedUrlExpireSeconds,
-});
-  console.log(presignedURL);
-      res.send(presignedURL)
+}));
+  console.log('THIS SHOULD BE THE PHOTO URL, OR AN OBJECT CONTAINING IT?:', photoURL);
+  photoURL.Body.pipe(res); // NOT SURE WHAT THIS LINE DOES, DOES THIS SEND THE PHOTOURL BACK TO THE CLIENT?
   } catch (error) {
       console.log(error)
       res.sendStatus(500);
