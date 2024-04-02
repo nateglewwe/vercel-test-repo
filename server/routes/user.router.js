@@ -215,6 +215,7 @@ router.put('/gearAssignEvent/:id', (req, res) => {
 
 router.get('/photo/:photoName', async (req, res) => { //NEED TO FINISH THIS, MAKE SAGA AND GEAR PHOTO REDUCER??
   try {
+    console.log('MADE IT TO THE SERVER SIDE GET PHOTO ROUTE--------------------------');
 const myBucket = process.env.AWS_BUCKET; //BUCKET_NAME
 const myKey = `gearphotos/${req.user.id}/${req.params.photoName}`; // bucketfolder/userIDfolder/file
 

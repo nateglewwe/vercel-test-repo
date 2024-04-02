@@ -99,3 +99,17 @@ function AddGearPage(props) {
 }
 
 export default AddGearPage;
+
+const updateKeyValue = (key, newValue) => {
+  setState(prevState => ({
+    ...prevState,
+    [key]: newValue
+  }));
+};
+
+const changeFeature = (featureNum, newValue) => {
+  setFeatures(prevState => ({
+    ...prevState,
+    featureNum: newValue
+  }))
+}

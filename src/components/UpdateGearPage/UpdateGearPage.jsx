@@ -31,7 +31,7 @@ function UpdateGearPage(props) {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: toolId });
-    getPhoto(); //I THINK THIS IS DONE??---------------------------------------------------------------
+    // getPhoto(); //I THINK THIS IS DONE??---------------------------------------------------------------
   }, []);
 
   function deletePhoto (toolName) {
@@ -84,7 +84,7 @@ function UpdateGearPage(props) {
       console.log('Success!');
       alert('Success!');
       clearForm();
-      getPhoto(); //I THINK THIS IS DONE??!--------------------------------------------
+      // getPhoto(); //I THINK THIS IS DONE??!--------------------------------------------
     }) .catch (err => {
       console.log('Error in onSubmit image axios post', err);
       alert('Something went wrong oh no');
@@ -100,7 +100,7 @@ function UpdateGearPage(props) {
 
   const getPhoto = () => { //I THINK I'M DONE WITH THIS??--------------------------------------
     axios.get(`/api/user/photo/https://freelancersgearschedulerbucket.s3.us-east-2.amazonaws.com/gearphotos/2/Midas%20MR18.jpg`)
-    // console.log(gear.photo) //USED FOR DEBUGGING
+    // console.log('ON THE CLIENT-SIDE AXIOS GET PHOTO ROUTE') //USED FOR DEBUGGING
     .then(response => {
       setImageList(response.data);
     }).catch(error => {
