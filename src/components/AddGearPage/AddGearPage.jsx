@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector} from 'react-redux';
 import { readAndCompressImage } from 'browser-image-resizer';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 import FeatureInput from '../FeatureInput/FeatureInput';
 
@@ -33,8 +35,6 @@ function AddGearPage(props) {
   const [note7Input, setNote7Input] = useState('');
   const [note8Input, setNote8Input] = useState('');
 
-
-
   const onFileChange = async (event) => {
     const fileToUpload = event.target.files[0];
     const copyFile = new Blob([fileToUpload], { type: fileToUpload.type, name: fileToUpload.name });
@@ -65,41 +65,42 @@ function AddGearPage(props) {
     document.getElementById('fileUploader').value= null;
   }
 
-  const addGearToList = () => {
-    console.log();
+  const addGearToList = (event) => {
+    event.preventDefault();
+    console.log('TESTING ADD GEAR BUTTON');
   }
 
   return (
     <div>
       <form onSubmit={addGearToList}>
         <h1>Add Gear:</h1>
-        {imagePreview ? 
-          <img src={imagePreview} alt={`Photo of ${fileName}`} />
-        :
-          <p>Add a photo to display preview here</p>
-        }<br />
-        <input type="file" accept="image/*" id="fileUploader"onChange={onFileChange} />
-        <input type="button" value="Delete Photo" onClick={() => deletePhoto()}/><br />
-        <h4>Name:</h4>
-        <input id="nameInput" placeholder="Name (Required)" value={nameInput}
-            onChange={(event) => {setNameInput(event.target.value)}} required/>
+          {imagePreview ? 
+            <img src={imagePreview} alt={`Photo of ${fileName}`} />
+          :
+            <p>Add a photo to display preview here</p>
+          }<br />
+          <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} />
+          <Button variant="contained" onClick={() => deletePhoto()}>Delete Photo</Button>
+        <h4>Name:</h4>          
+          <TextField id="nameInput" placeholder="Name (Required)" value={nameInput}
+              onChange={(event) => {setNameInput(event.target.value)}} size="small" required/>
         <h4>Features:</h4>
-        <input id="feature1Input" placeholder="Feature 1" value={feature1Input}
-            onChange={(event) => {setFeature1Input(event.target.value)}} /><br />
-        <input id="feature2Input" placeholder="Feature 2" value={feature2Input}
-            onChange={(event) => {setFeature2Input(event.target.value)}} /><br />
-        <input id="feature3Input" placeholder="Feature 3" value={feature3Input}
-            onChange={(event) => {setFeature3Input(event.target.value)}} /><br />
-        <input id="feature4Input" placeholder="Feature 4" value={feature4Input}
-            onChange={(event) => {setFeature4Input(event.target.value)}} /><br />
-        <input id="feature5Input" placeholder="Feature 5" value={feature5Input}
-            onChange={(event) => {setFeature5Input(event.target.value)}} /><br />
-        <input id="feature6Input" placeholder="Feature 6" value={feature6Input}
-            onChange={(event) => {setFeature6Input(event.target.value)}} /><br />
-        <input id="feature7Input" placeholder="Feature 7" value={feature7Input}
-            onChange={(event) => {setFeature7Input(event.target.value)}} /><br />
-        <input id="feature8Input" placeholder="Feature 8" value={feature8Input}
-            onChange={(event) => {setFeature8Input(event.target.value)}} /><br />
+          <TextField id="feature1Input" placeholder="Feature 1" value={feature1Input}
+              onChange={(event) => {setFeature1Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature2Input" placeholder="Feature 2" value={feature2Input}
+              onChange={(event) => {setFeature2Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature3Input" placeholder="Feature 3" value={feature3Input}
+              onChange={(event) => {setFeature3Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature4Input" placeholder="Feature 4" value={feature4Input}
+              onChange={(event) => {setFeature4Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature5Input" placeholder="Feature 5" value={feature5Input}
+              onChange={(event) => {setFeature5Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature6Input" placeholder="Feature 6" value={feature6Input}
+              onChange={(event) => {setFeature6Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature7Input" placeholder="Feature 7" value={feature7Input}
+              onChange={(event) => {setFeature7Input(event.target.value)}} size="small" margin="dense" /><br />
+          <TextField id="feature8Input" placeholder="Feature 8" value={feature8Input}
+              onChange={(event) => {setFeature8Input(event.target.value)}} size="small" margin="dense" /><br />
         <h4>Notes:</h4>
         <input id="note1Input" placeholder="Note 1" value={note1Input}
             onChange={(event) => {setNote1Input(event.target.value)}} /><br />
@@ -119,8 +120,6 @@ function AddGearPage(props) {
             onChange={(event) => {setNote8Input(event.target.value)}} /><br />
         <button type="submit">Add Gear</button>
       </form>
-      
-
     </div>
   );
 }
