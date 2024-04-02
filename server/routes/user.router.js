@@ -213,18 +213,19 @@ router.put('/gearAssignEvent/:id', (req, res) => {
   });
 });
 
-router.get('/photo/:photoName', async (req, res) => { //NEED TO FINISH THIS, MAKE SAGA AND GEAR PHOTO REDUCER??
+router.get('/photo/:photoName', async (req, res) => { // MAKE SAGA AND GEAR PHOTO REDUCER??
   try {
     console.log('MADE IT TO THE SERVER SIDE GET PHOTO ROUTE--------------------------');
 const myBucket = process.env.AWS_BUCKET; //BUCKET_NAME
 const myKey = `gearphotos/${req.user.id}/${req.params.photoName}`; // bucketfolder/userIDfolder/file
 
-const photoURL = await s3Client.send(new GetObjectCommand ({
+const data = await s3Client.send(new GetObjectCommand ({
   Bucket: myBucket,
   Key: myKey,
 }));
-  console.log('THIS SHOULD BE THE PHOTO URL, OR AN OBJECT CONTAINING IT?:', photoURL);
-  photoURL.Body.pipe(res); // NOT SURE WHAT THIS LINE DOES, DOES THIS SEND THE PHOTOURL BACK TO THE CLIENT?
+  console.log('THIS SHOULD BE THE PHOTO DATA, OR AN OBJECT CONTAINING IT?:', data);
+  data.Body.pipe(res); // This .pipe gives the client side access to the photo data via
+                       // path /api/user/photo/photoName, see src= attribute on <img> tags on client side
   } catch (error) {
       console.log(error)
       res.sendStatus(500);
@@ -236,21 +237,21 @@ router.post('/photo', async (req, res) => {
     const {photoName, toolId} = req.query;
     const photoData = req.files.image.data;
   
-    const uploadedFileURL = await s3Client.send( new PutObjectCommand({
+    const metadataResponse = await s3Client.send( new PutObjectCommand({
       Bucket: 'freelancersgearschedulerbucket',
       Key: `gearphotos/${req.user.id}/${photoName}`, // bucketfolder/userIDfolder/file, MIGHT ADD TIMESTAMP HERE LATER, SEE CHRIS' VIDEO AT 1:20 MIN MARK
       Body: photoData, // photo data to upload
       // ACL: 'private'
     }));
     //URL where the file can be accessed, might need ID for private read? See Chris' video at 50 min mark
-    console.log('URL WHERE FILE WAS UPLOADED', uploadedFileURL);
+    console.log('METADATA RESPONSE ABOUT FILE BEING UPLOADED TO S3 BUCKET', metadataResponse);
   
-    //Put URL in database:
+    //Put photoName in database:
     await pool.query(`
       UPDATE "gear_list"
       SET photo = $2
       WHERE "gear_list".id = $1;
-      `, [toolId, uploadedFileURL]);
+      `, [toolId, photoName]);
     //Send OK back to client side
     res.sendStatus(201);
   } catch (err) {

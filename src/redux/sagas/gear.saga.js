@@ -38,7 +38,7 @@ function* deleteGear (action) {
     }
 }
 
-function* deletePhoto (action) {
+function* deletePhoto (action) { // CURRENTLY THIS ONLY DELETES THE PHOTO FROM THE DATABASE, NOT AWS S3 BUCKET, NEED TO CHANGE?
     try {
         //Send ID of gear to have its photo deleted
         yield axios.put(`/api/user/gearPhotoDelete/${action.payload}`);

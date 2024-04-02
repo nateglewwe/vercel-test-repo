@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 function GearListPage(props) {
 
@@ -43,23 +46,23 @@ function GearListPage(props) {
                        tool.note_5, tool.note_6, tool.note_7, tool.note_8];
           return (
             <div key={tool.id}>
-              <p>{tool.photo}</p>
+              <img src={`/api/user/photo/${tool.photo}`} alt={tool.name}/>
               <h4>Name:</h4>
               <p>{tool.name}</p>
               <h4>Features:</h4>
               {features.map((feature, index) => {return(<div key={index}><span>{feature}</span></div> )})}
               <h4>Notes:</h4>
               {notes.map((note, index) => {return(<div key={index}><span>{note}</span></div> )})}<br />
-              <select name="" id="" value={tool.event_id || ''} onChange={(event) => assignToEvent(tool.id, event.target.value)}>
-                <option value=''>Assign to event</option>
+              <Select name="" id="" value={tool.event_id || ''} onChange={(event) => assignToEvent(tool.id, event.target.value)}>
+                <MenuItem value=''>Assign to event</MenuItem>
                 {events.map(event => {
                   return (
-                    <option key={event.id} value={event.id}>{event.name}</option>
+                    <MenuItem key={event.id} value={event.id}>{event.name}</MenuItem>
                   )
                 })}
-              </select>
-              <input type="button" value="Update Gear" onClick={() => updateBtnClk(tool.id, tool.name)}/>
-              <input type="button" value="Delete Gear" onClick={() => deleteBtnClk(tool.id, tool.name)}/>
+              </Select>&nbsp;
+              <Button variant="contained" onClick={() => updateBtnClk(tool.id, tool.name)}>Update Gear</Button>&nbsp;
+              <Button variant="contained" onClick={() => deleteBtnClk(tool.id, tool.name)}>Delete Gear</Button><br /><br />
             </div>
           );
         })}

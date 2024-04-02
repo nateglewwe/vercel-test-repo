@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { readAndCompressImage } from 'browser-image-resizer';
+import Button from '@mui/material/Button';
 
 import EditableFeature from '../EditableFeature/EditableFeature';
 import EditableNote from '../EditableNote/EditableNote';
@@ -94,8 +95,9 @@ function UpdateGearPage(props) {
   const clearForm = () => {
     setFileName('');
     setFileType('');
-    setSelectedFile(undefined);
-    setImagePreview(undefined);
+    setSelectedFile();
+    setImagePreview();
+    document.getElementById('fileUploader').value= null;
   }
 
   const getPhoto = () => { //I THINK I'M DONE WITH THIS??--------------------------------------
@@ -113,9 +115,9 @@ function UpdateGearPage(props) {
     <div>
       <h1>Update This Gear:</h1>
       {gear && (<>
-      <img src={imageList} alt={`Photo of ${gear.name}`} />
+      <img src={imagePreview} alt={`Photo of ${gear.name}`} />
       <form onSubmit={sendPhotoToServer}>
-        <input type="file" accept="image/*" onChange={onFileChange} />
+        <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} />
         <button type="submit">Submit</button>
       </form>
       <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />

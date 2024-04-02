@@ -102,23 +102,23 @@ function AddGearPage(props) {
           <TextField id="feature8Input" placeholder="Feature 8" value={feature8Input}
               onChange={(event) => {setFeature8Input(event.target.value)}} size="small" margin="dense" /><br />
         <h4>Notes:</h4>
-        <input id="note1Input" placeholder="Note 1" value={note1Input}
-            onChange={(event) => {setNote1Input(event.target.value)}} /><br />
-        <input id="note2Input" placeholder="Note 2" value={note2Input}
-            onChange={(event) => {setNote2Input(event.target.value)}} /><br />
-        <input id="note3Input" placeholder="Note 3" value={note3Input}
-            onChange={(event) => {setNote3Input(event.target.value)}} /><br />
-        <input id="note4Input" placeholder="Note 4" value={note4Input}
-            onChange={(event) => {setNote4Input(event.target.value)}} /><br />
-        <input id="note5Input" placeholder="Note 5" value={note5Input}
-            onChange={(event) => {setNote5Input(event.target.value)}} /><br />
-        <input id="note6Input" placeholder="Note 6" value={note6Input}
-            onChange={(event) => {setNote6Input(event.target.value)}} /><br />
-        <input id="note7Input" placeholder="Note 7" value={note7Input}
-            onChange={(event) => {setNote7Input(event.target.value)}} /><br />
-        <input id="note8Input" placeholder="Note 8" value={note8Input}
-            onChange={(event) => {setNote8Input(event.target.value)}} /><br />
-        <button type="submit">Add Gear</button>
+        <TextField id="note1Input" placeholder="Note 1" value={note1Input}
+            onChange={(event) => {setNote1Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note2Input" placeholder="Note 2" value={note2Input}
+            onChange={(event) => {setNote2Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note3Input" placeholder="Note 3" value={note3Input}
+            onChange={(event) => {setNote3Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note4Input" placeholder="Note 4" value={note4Input}
+            onChange={(event) => {setNote4Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note5Input" placeholder="Note 5" value={note5Input}
+            onChange={(event) => {setNote5Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note6Input" placeholder="Note 6" value={note6Input}
+            onChange={(event) => {setNote6Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note7Input" placeholder="Note 7" value={note7Input}
+            onChange={(event) => {setNote7Input(event.target.value)}} size="small" margin="dense" /><br />
+        <TextField id="note8Input" placeholder="Note 8" value={note8Input}
+            onChange={(event) => {setNote8Input(event.target.value)}} size="small" margin="dense" /><br />
+        <Button variant="contained" type="submit">Create Gear Listing</Button>
       </form>
     </div>
   );
