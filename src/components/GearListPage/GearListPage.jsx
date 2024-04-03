@@ -9,6 +9,8 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 
+import styles from './GearListPage.css';
+
 function GearListPage(props) {
 
   const dispatch = useDispatch();
@@ -50,7 +52,7 @@ function GearListPage(props) {
                        tool.note_5, tool.note_6, tool.note_7, tool.note_8];
           return (
             <div key={tool.id}>
-              <Grid container>
+              <Grid container spacing={2}>
                 <Grid item xs={3}>
                   <b>Name: </b>
                   <span>{tool.name}</span><br /><br />
@@ -82,7 +84,7 @@ function GearListPage(props) {
                         )
                       })}
                     </Select>
-                  </FormControl>
+                  </FormControl><br /><br />
                   <Button variant="contained" onClick={() => updateBtnClk(tool.id, tool.name)}>Update Gear</Button>&nbsp;
                   <Button variant="contained" onClick={() => deleteBtnClk(tool.id, tool.name)}>Delete Gear</Button><br /><br />
                 </Grid>
