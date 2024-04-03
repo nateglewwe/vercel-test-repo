@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
 
 function GearListPage(props) {
 
@@ -41,6 +42,11 @@ function GearListPage(props) {
 
   return (
     <div>
+      <Grid container>
+        <Grid item xs={3}>
+
+        </Grid>
+      </Grid>
       <h1>Your Gear:</h1>
       {gear.map(tool => {
         const features = [tool.feature_1, tool.feature_2, tool.feature_3, tool.feature_4,
