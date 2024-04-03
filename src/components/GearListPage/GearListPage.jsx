@@ -52,18 +52,18 @@ function GearListPage(props) {
                        tool.note_5, tool.note_6, tool.note_7, tool.note_8];
           return (
             <div key={tool.id}>
-              <Grid container spacing={2} className="gearGrid">
+              <Grid container spacing={2} className="gearGridList">
                 <Grid item xs={3}>
                   <b>Name: </b>
                   <span>{tool.name}</span><br /><br />
-                  <img src={`/api/user/photo/${tool.photo}`} alt={tool.name}/>
+                  <img src={`/api/user/photo/${tool.photo}`} alt={tool.name}/><br /><br />
                 </Grid>
                 <Grid item xs={3}>
-                  <h4>Features:</h4>
+                  <b>Features:</b>
                   {features.map((feature, index) => {return(<div key={index}><span>{feature}</span></div> )})}
                 </Grid>
                 <Grid item xs={3}>
-                  <h4>Notes:</h4>
+                  <b>Notes:</b>
                   {notes.map((note, index) => {return(<div key={index}><span>{note}</span></div> )})}<br />
                 </Grid>
                 <Grid item xs={3}>

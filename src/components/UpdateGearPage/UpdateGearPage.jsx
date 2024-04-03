@@ -4,6 +4,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { readAndCompressImage } from 'browser-image-resizer';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+
+import './UpdateGearPage.css';
 
 import EditableFeature from '../EditableFeature/EditableFeature';
 import EditableNote from '../EditableNote/EditableNote';
@@ -112,37 +115,44 @@ function UpdateGearPage(props) {
   }
 
   return (
-    <div>
+    <div className="updateGearDOM" >
       <h1>Update This Gear:</h1>
       {gear && (<>
-      <img src={imagePreview} alt={`Photo of ${gear.name}`} />
-      <form onSubmit={sendPhotoToServer}>
-        <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} />
-        <button type="submit">Submit</button>
-      </form>
-      <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />
-      <h4>Name:</h4>
-      {isEditing ?
-      <>
-        <input id="nameInput" placeholder="Name" value={nameInput}
-          onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
-        <button onClick={changeName}>Save</button>&nbsp;
-        <button onClick={() => setIsEditing(false)}>Cancel</button>
-      </>
-      :
-      <>
-        <span>{gear.name}</span>&nbsp;
-        <button onClick={changeName}>Edit</button>
-      </>}
-      <div>
-        <h4>Features:</h4>
-        {gearFeatures}
-      </div>
-      <div>
-        <h4>Notes:</h4>
-        {gearNotes}
-      </div><br />
-      <input type="button" value="Back to Gear List" onClick={() => history.push(`/gearlist`)}/>
+        <Grid container spacing={2} className="gearGridUpdate" >
+          <Grid item xs={3}>
+            <b>Name: </b>
+            {isEditing ?
+            <>
+              <input id="nameInput" placeholder="Name" value={nameInput}
+                onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
+              <button onClick={changeName}>Save</button>&nbsp;
+              <button onClick={() => setIsEditing(false)}>Cancel</button>
+            </>
+            :
+            <>
+              <span>{gear.name}</span>&nbsp;
+              <button onClick={changeName}>Edit</button>
+            </>}<br /><br />
+            <img src={imagePreview} alt={`Photo of ${gear.name}`} />
+            <form onSubmit={sendPhotoToServer}>
+              <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} required/>
+              <button type="submit">Change Photo</button>
+              {/* NEED TO ADD CANCEL BUTTON WITH CONDITIONAL RENDERING!---------------------------------------- */}
+            </form>
+            <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />
+          </Grid>
+          <Grid item xs={3}>
+            <b>Features:</b>
+            {gearFeatures}
+          </Grid>
+          <Grid item xs={3}>
+            <b>Notes:</b>
+            {gearNotes}
+          </Grid><br />
+          <Grid item xs={3}>
+            <input type="button" value="Back to Gear List" onClick={() => history.push(`/gearlist`)}/>
+          </Grid>
+        </Grid>
       </>)}
     </div>
   );
