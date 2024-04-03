@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
 
 function GearListPage(props) {
 
@@ -53,14 +56,24 @@ function GearListPage(props) {
               {features.map((feature, index) => {return(<div key={index}><span>{feature}</span></div> )})}
               <h4>Notes:</h4>
               {notes.map((note, index) => {return(<div key={index}><span>{note}</span></div> )})}<br />
-              <Select name="" id="" value={tool.event_id || ''} onChange={(event) => assignToEvent(tool.id, event.target.value)}>
-                <MenuItem value=''>Assign to event</MenuItem>
-                {events.map(event => {
-                  return (
-                    <MenuItem key={event.id} value={event.id}>{event.name}</MenuItem>
-                  )
-                })}
-              </Select>&nbsp;
+              <FormControl sx={{minWidth: '220px', mr:2}}>
+                <InputLabel id="assignToEventLabel" shrink>Assign To Event</InputLabel>
+                {/* <FormHelperText>Assign to Event</FormHelperText> */}
+                <Select
+                  labelId="assignToEventLabel"
+                  label="Assign To Event"
+                  value={tool.event_id || ''}
+                  displayEmpty
+                  onChange={(event) => assignToEvent(tool.id, event.target.value)}
+                >
+                  <MenuItem value="" >Not Assigned</MenuItem>
+                  {events.map(event => {
+                    return (
+                      <MenuItem key={event.id} value={event.id}>{event.name}</MenuItem>
+                    )
+                  })}
+                </Select>
+              </FormControl>
               <Button variant="contained" onClick={() => updateBtnClk(tool.id, tool.name)}>Update Gear</Button>&nbsp;
               <Button variant="contained" onClick={() => deleteBtnClk(tool.id, tool.name)}>Delete Gear</Button><br /><br />
             </div>
