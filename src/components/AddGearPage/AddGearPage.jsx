@@ -67,7 +67,6 @@ function AddGearPage(props) {
 
   const addGearToList = (event) => {
     event.preventDefault();
-    console.log('TESTING ADD GEAR BUTTON');
   }
 
   return (

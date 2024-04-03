@@ -260,6 +260,16 @@ router.post('/photo', async (req, res) => {
   }
 });
 
+router.post('/gear', async (req, res) => {
+  try {
+
+  } catch (err) {
+    console.log('Error in server side POST gear router', err)
+    res.sendStatus(500);
+  }
+});
+
+
 router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"
