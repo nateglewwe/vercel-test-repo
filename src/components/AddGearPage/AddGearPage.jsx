@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';//List of technology imports
 import { readAndCompressImage } from 'browser-image-resizer';
-import Button from '@mui/material/Button';
+import {useDispatch, useSelector} from 'react-redux';
+
+import Button from '@mui/material/Button';//Listo f MUI imports
 import TextField from '@mui/material/TextField';
 
-import FeatureInput from '../FeatureInput/FeatureInput';
+import FeatureInput from '../FeatureInput/FeatureInput';// List of component imports
 
 
 function AddGearPage(props) {
 
   const store = useSelector((store) => store);
+  const dispatch = useDispatch();
 
   const [fileName, setFileName] = useState('');  // Selected image file name
   const [fileType, setFileType] = useState('');  // Selected file type
@@ -69,17 +71,10 @@ function AddGearPage(props) {
     event.preventDefault();
     const formData = new FormData();
     formData.append ('image', selectedFile);
-    axios.post(`api/user/photo?photoName=${fileName}&toolId=1`, formData)
-    .then (response => {
-      console.log('Success!');
-      alert('Success!');
-      // clearForm();
-      // getPhoto();
-      // Add history.push back to gear list page?
-    }) .catch (err => {
-      console.log('Error in addGearToList axios post', err);
-      alert('Something went wrong uh oh');
-    })
+    dispatch({ type: 'POST_NEW_GEAR', payload: {fileName: fileName, formData: formData} });
+    // clearForm();
+    // getPhoto();
+    // Add history.push back to gear list page?
   }
 
   return (

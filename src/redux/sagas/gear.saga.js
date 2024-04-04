@@ -116,8 +116,8 @@ function* postGear (action) {
         
         
         //Then send all of the gear data to the database for new gear entry
-        console.log('THIS IS ALL OF THE NEW GEAR DATA:', action.payload);
-        yield axios.post(`/api/user/gear`, action.payload);
+        // console.log('THIS IS ALL OF THE NEW GEAR DATA:', action.payload);
+        // yield axios.post(`/api/user/gear`, action.payload);
 
         //I don't think this needs to call any other sagas or anything afterwards here?
     }
