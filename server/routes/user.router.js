@@ -260,13 +260,48 @@ router.post('/photo', async (req, res) => {
   }
 });
 
-router.post('/gear', async (req, res) => {
-  try {
-
+router.post('/newgearphoto', async (req, res) => {
+  try{
+    const photoName = req.query.fileName;
+    const photoData = req.files.image.data; //OR POSSIBLY req.body.formData
+  
+    const metadataResponse = await s3Client.send( new PutObjectCommand({
+      Bucket: 'freelancersgearschedulerbucket',
+      Key: `gearphotos/${req.user.id}/${photoName}`, // bucketfolder/userIDfolder/file, MIGHT ADD TIMESTAMP HERE LATER, SEE CHRIS' VIDEO AT 1:20 MIN MARK
+      Body: photoData, // photo data to upload
+      // ACL: 'private'
+    }));
+    console.log('SUCCESSFUL METADATA RESPONSE ABOUT FILE BEING UPLOADED TO S3 BUCKET', metadataResponse);
   } catch (err) {
-    console.log('Error in server side POST gear router', err)
-    res.sendStatus(500);
+      console.log('Error in S3 photo server side post newgearphoto router', err)
+      res.sendStatus(500);
   }
+});
+
+router.post('/gear', (req, res) => {
+  const queryText = `
+  INSERT INTO "gear_list"
+  (name, feature_1, feature_2, feature_3, feature_4, feature_5, feature_6, feature_7, feature_8,
+    note_1, note_2, note_3, note_4, note_5, note_6, note_7, note_8, photo, user_id)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19);
+    `;
+  const queryArgs = [
+    req.body.name,
+    req.body.feature1, req.body.feature2, req.body.feature3, req.body.feature4,
+    req.body.feature5, req.body.feature6, req.body.feature7, req.body.feature8,
+    req.body.note1, req.body.note2, req.body.note3, req.body.note4,
+    req.body.note5, req.body.note6, req.body.note7, req.body.note8,
+    req.body.photo,
+    req.user.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('New gear with following data has been POSTED to database:', req.body);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in server side POST gear route:', err);
+    res.sendStatus(500);
+  });
 });
 
 

@@ -90,7 +90,7 @@ function UpdateGearPage(props) {
       clearForm();
       // getPhoto(); //I THINK THIS IS DONE??!--------------------------------------------
     }) .catch (err => {
-      console.log('Error in onSubmit image axios post', err);
+      console.log('Error in sendPhotoToServer axios post', err);
       alert('Something went wrong oh no');
     })
   }

@@ -108,6 +108,24 @@ function* assignToEvent (action) {
     }
 }
 
+function* postGear (action) {
+    try {
+        //First send photo to store in S3 bucket
+        console.log('ATTEMPTING TO SEND NEWGEARPHOTO TO S3 BUCKET');
+        yield axios.post(`/api/user/newgearphoto?photoName=${action.payload.fileName}`, action.payload.formData)
+        
+        
+        //Then send all of the gear data to the database for new gear entry
+        console.log('THIS IS ALL OF THE NEW GEAR DATA:', action.payload);
+        yield axios.post(`/api/user/gear`, action.payload);
+
+        //I don't think this needs to call any other sagas or anything afterwards here?
+    }
+    catch(err) {
+        console.log('postGear saga error:', err);
+    }
+}
+
 function* gearSaga() {
     yield takeLatest('FETCH_GEAR', fetchGear);
     yield takeLatest('DELETE_GEAR', deleteGear);
@@ -117,6 +135,7 @@ function* gearSaga() {
     yield takeLatest('UPDATE_GEAR_FEATURE', changeGearFeature);
     yield takeLatest('UPDATE_GEAR_NOTE', changeGearNote);
     yield takeLatest('ASSIGN_TO_EVENT', assignToEvent);
+    yield takeLatest('POST_NEW_GEAR', postGear);
   }
   
   export default gearSaga;

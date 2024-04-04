@@ -67,6 +67,19 @@ function AddGearPage(props) {
 
   const addGearToList = (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append ('image', selectedFile);
+    axios.post(`api/user/photo?photoName=${fileName}&toolId=1`, formData)
+    .then (response => {
+      console.log('Success!');
+      alert('Success!');
+      // clearForm();
+      // getPhoto();
+      // Add history.push back to gear list page?
+    }) .catch (err => {
+      console.log('Error in addGearToList axios post', err);
+      alert('Something went wrong uh oh');
+    })
   }
 
   return (
