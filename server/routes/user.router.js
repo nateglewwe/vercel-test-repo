@@ -262,8 +262,12 @@ router.post('/photo', async (req, res) => {
 
 router.post('/newgearphoto', async (req, res) => {
   try{
-    const photoName = req.query.fileName;
-    const photoData = req.files.image.data; //OR POSSIBLY req.body.formData
+
+    console.log('IS THIS THE IMAGE DATA???:', req.files);
+    console.log('IS THIS THE NAME???:', req.query.photoName);
+
+    const photoName = req.query.photoName;
+    const photoData = req.files.image.data; //OR POSSIBLY req.body.formData?? Why is this different from other sagas/server routes?
   
     const metadataResponse = await s3Client.send( new PutObjectCommand({
       Bucket: 'freelancersgearschedulerbucket',
