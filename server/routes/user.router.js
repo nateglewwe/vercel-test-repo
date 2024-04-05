@@ -263,8 +263,8 @@ router.post('/photo', async (req, res) => {
 router.post('/newgearphoto', async (req, res) => {
   try{
 
-    // console.log('IS THIS THE IMAGE DATA???:', req.files);
-    // console.log('IS THIS THE NAME???:', req.query.photoName);
+    console.log('IS THIS THE IMAGE DATA???:', req.files);
+    console.log('IS THIS THE NAME???:', req.query.photoName);
 
     const photoName = req.query.photoName;
     const photoData = req.files.image.data; //OR POSSIBLY req.body.formData?? Why is this different from other sagas/server routes?
@@ -276,6 +276,7 @@ router.post('/newgearphoto', async (req, res) => {
       // ACL: 'private'
     }));
     console.log('SUCCESSFUL METADATA RESPONSE ABOUT FILE BEING UPLOADED TO S3 BUCKET', metadataResponse);
+    res.sendStatus(200);
   } catch (err) {
       console.log('Error in S3 photo server side post newgearphoto router', err)
       res.sendStatus(500);
@@ -308,7 +309,6 @@ router.post('/gear', (req, res) => {
     res.sendStatus(500);
   });
 });
-
 
 router.get('/events', (req, res) => {
   const queryText = `
