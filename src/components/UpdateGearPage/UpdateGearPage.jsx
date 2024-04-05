@@ -3,8 +3,21 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { readAndCompressImage } from 'browser-image-resizer';
+
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 import './UpdateGearPage.css';
 
@@ -133,9 +146,15 @@ function UpdateGearPage(props) {
               <span>{gear.name}</span>&nbsp;
               <Button variant="contained" size="small" onClick={changeName}>Edit</Button>
             </>}<br /><br />
+            {imagePreview ?
             <img src={imagePreview} alt={`Photo of ${gear.name}`} />
+            :
+            <img src={`/api/user/photo/${gear.photo}`} alt={gear.name}/>
+            }
             <form onSubmit={sendPhotoToServer}>
-              <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} required/>
+              <Button component="label" variant="contained" size="small" >Choose File
+                <VisuallyHiddenInput type="file" accept="image/*" id="fileUploader" onChange={onFileChange} required/>
+              </Button>&nbsp;
               <Button variant="contained" size="small" type="submit">Change Photo</Button>
               {/* NEED TO ADD CANCEL BUTTON WITH CONDITIONAL RENDERING!---------------------------------------- */}
             </form><br />
