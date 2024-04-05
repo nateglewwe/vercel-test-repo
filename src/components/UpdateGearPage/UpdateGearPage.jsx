@@ -141,15 +141,15 @@ function UpdateGearPage(props) {
             </form><br />
             <Button variant="contained" size="small" onClick={() => deletePhoto(gear.name)}>Delete Photo</Button>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <b>Features:</b>
             {gearFeatures}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <b>Notes:</b>
             {gearNotes}
           </Grid><br />
-          <Grid item xs={3}>
+          <Grid item xs={1}>
             <input type="button" value="Back to Gear List" onClick={() => history.push(`/gearlist`)}/>
           </Grid>
         </Grid>

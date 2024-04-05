@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import Button from '@mui/material/Button';
+
+
 function EditableNote ({initialValue, noteKey }) {
     const dispatch = useDispatch();
     let [isEditing, setIsEditing] = useState(false)
@@ -44,14 +47,14 @@ function EditableNote ({initialValue, noteKey }) {
                     <>
                         <input type="text" value={noteInputValue || ''} onChange={(event) => {setNoteInputValue(event.target.value)}}
                         onKeyDown={handleEdit} placeholder="Note"/>
-                        <button onClick={handleEdit}>Save</button>&nbsp;
-                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                        <Button onClick={handleEdit} variant="contained" size="small" >Save</Button>&nbsp;
+                        <Button onClick={() => setIsEditing(false)} variant="contained" size="small" >Cancel</Button>
                     </>
                     :
                     <>
                         <span>{initialValue}</span>&nbsp;
-                        <button onClick={handleEdit}>Edit</button>&nbsp;
-                        <button onClick={handleDeleteNote}>Delete</button>
+                        <Button onClick={handleEdit} variant="contained" size="small" >Edit</Button>&nbsp;
+                        <Button onClick={handleDeleteNote} variant="contained" size="small" >Delete</Button>
                     </>}
                 </div>
             )
@@ -60,7 +63,7 @@ function EditableNote ({initialValue, noteKey }) {
                 <div>
                     <input type="text" value={addNoteValue || ''} onChange={(event) => {setAddNoteValue(event.target.value)}}
                         onKeyDown={handleAddNote} placeholder="Note"/>
-                    <button onClick={handleAddNote}>Add</button>
+                    <Button onClick={handleAddNote} variant="contained" size="small" >Add</Button>
                 </div>
             )}
         </>
