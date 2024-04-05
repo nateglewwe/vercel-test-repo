@@ -71,7 +71,30 @@ function AddGearPage(props) {
     event.preventDefault();
     const formData = new FormData();
     formData.append ('image', selectedFile);
-    dispatch({ type: 'POST_NEW_GEAR', payload: {fileName: fileName, formData: formData} });
+    dispatch({ type: 'POST_NEW_GEAR', payload: {
+      fileName: fileName, 
+      formData: formData,
+      dataForDB: {
+        name: nameInput,
+        feature1: feature1Input,
+        feature2: feature2Input,
+        feature3: feature3Input,
+        feature4: feature4Input,
+        feature5: feature5Input,
+        feature6: feature6Input,
+        feature7: feature7Input,
+        feature8: feature8Input,
+        note1: note1Input,
+        note2: note2Input,
+        note3: note3Input,
+        note4: note4Input,
+        note5: note5Input,
+        note6: note6Input,
+        note7: note7Input,
+        note8: note8Input,
+        photo: fileName,
+      },
+    } });
     // clearForm();
     // getPhoto();
     // Add history.push back to gear list page?

@@ -111,13 +111,13 @@ function* assignToEvent (action) {
 function* postGear (action) {
     try {
         //First send photo to store in S3 bucket
-        console.log('ATTEMPTING TO SEND NEWGEARPHOTO TO S3 BUCKET');
-        yield axios.post(`/api/user/newgearphoto?photoName=${action.payload.fileName}`, action.payload.formData)
+        // console.log('ATTEMPTING TO SEND NEWGEARPHOTO TO S3 BUCKET');
+        // yield axios.post(`/api/user/newgearphoto?photoName=${action.payload.fileName}`, action.payload.formData)
         
         
         //Then send all of the gear data to the database for new gear entry
-        // console.log('THIS IS ALL OF THE NEW GEAR DATA:', action.payload);
-        // yield axios.post(`/api/user/gear`, action.payload);
+        console.log('THIS IS ALL OF THE NEW GEAR DATA:', action.payload.dataForDB);
+        yield axios.post(`/api/user/gear`, action.payload.dataForDB);
 
         //I don't think this needs to call any other sagas or anything afterwards here?
     }

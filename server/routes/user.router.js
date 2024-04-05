@@ -263,8 +263,8 @@ router.post('/photo', async (req, res) => {
 router.post('/newgearphoto', async (req, res) => {
   try{
 
-    console.log('IS THIS THE IMAGE DATA???:', req.files);
-    console.log('IS THIS THE NAME???:', req.query.photoName);
+    // console.log('IS THIS THE IMAGE DATA???:', req.files);
+    // console.log('IS THIS THE NAME???:', req.query.photoName);
 
     const photoName = req.query.photoName;
     const photoData = req.files.image.data; //OR POSSIBLY req.body.formData?? Why is this different from other sagas/server routes?
@@ -283,6 +283,7 @@ router.post('/newgearphoto', async (req, res) => {
 });
 
 router.post('/gear', (req, res) => {
+  console.log('OBJECT FULL OF GEAR ENTRY DATA:', req.body);
   const queryText = `
   INSERT INTO "gear_list"
   (name, feature_1, feature_2, feature_3, feature_4, feature_5, feature_6, feature_7, feature_8,
