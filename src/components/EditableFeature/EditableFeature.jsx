@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 
+import './EditableFeature.css';
+
 
 
 function EditableFeature ({initialValue, featureKey }) {
