@@ -4,6 +4,19 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Button from '@mui/material/Button';//Listo f MUI imports
 import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 import FeatureInput from '../FeatureInput/FeatureInput';// List of component imports
 
@@ -59,7 +72,7 @@ function AddGearPage(props) {
     }
   }
 
-  const deletePhoto = () => {
+  const clearPhoto = () => {
     setFileName('');
     setFileType('');
     setSelectedFile();
@@ -101,54 +114,72 @@ function AddGearPage(props) {
   }
 
   return (
-    <div>
+    <div className="updateGearDOM" >
       <form onSubmit={addGearToList}>
         <h1>Add Gear:</h1>
-          {imagePreview ? 
-            <img src={imagePreview} alt={`Photo of ${fileName}`} />
-          :
-            <p>Add a photo to display preview here</p>
-          }<br />
-          <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} />
-          <Button variant="contained" onClick={() => deletePhoto()}>Delete Photo</Button>
-        <h4>Name:</h4>          
-          <TextField id="nameInput" placeholder="Name (Required)" value={nameInput}
-              onChange={(event) => {setNameInput(event.target.value)}} size="small" required/>
-        <h4>Features:</h4>
-          <TextField id="feature1Input" placeholder="Feature 1" value={feature1Input}
-              onChange={(event) => {setFeature1Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature2Input" placeholder="Feature 2" value={feature2Input}
-              onChange={(event) => {setFeature2Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature3Input" placeholder="Feature 3" value={feature3Input}
-              onChange={(event) => {setFeature3Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature4Input" placeholder="Feature 4" value={feature4Input}
-              onChange={(event) => {setFeature4Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature5Input" placeholder="Feature 5" value={feature5Input}
-              onChange={(event) => {setFeature5Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature6Input" placeholder="Feature 6" value={feature6Input}
-              onChange={(event) => {setFeature6Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature7Input" placeholder="Feature 7" value={feature7Input}
-              onChange={(event) => {setFeature7Input(event.target.value)}} size="small" margin="dense" /><br />
-          <TextField id="feature8Input" placeholder="Feature 8" value={feature8Input}
-              onChange={(event) => {setFeature8Input(event.target.value)}} size="small" margin="dense" /><br />
-        <h4>Notes:</h4>
-        <TextField id="note1Input" placeholder="Note 1" value={note1Input}
-            onChange={(event) => {setNote1Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note2Input" placeholder="Note 2" value={note2Input}
-            onChange={(event) => {setNote2Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note3Input" placeholder="Note 3" value={note3Input}
-            onChange={(event) => {setNote3Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note4Input" placeholder="Note 4" value={note4Input}
-            onChange={(event) => {setNote4Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note5Input" placeholder="Note 5" value={note5Input}
-            onChange={(event) => {setNote5Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note6Input" placeholder="Note 6" value={note6Input}
-            onChange={(event) => {setNote6Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note7Input" placeholder="Note 7" value={note7Input}
-            onChange={(event) => {setNote7Input(event.target.value)}} size="small" margin="dense" /><br />
-        <TextField id="note8Input" placeholder="Note 8" value={note8Input}
-            onChange={(event) => {setNote8Input(event.target.value)}} size="small" margin="dense" /><br />
-        <Button variant="contained" type="submit">Create Gear Listing</Button>
+        <Grid container spacing={2} className="gearGridUpdate" >
+          <Grid item xs={3}> 
+            {imagePreview ? 
+              <img src={imagePreview} alt={`Photo of ${fileName}`} />
+            :
+              <>
+              <b>Add a photo to display preview here:</b><br /><br /><br />
+              </>
+            }<br />
+
+
+            <Button component="label" variant="contained" size="small" >Choose File
+            <VisuallyHiddenInput type="file" accept="image/*" id="fileUploader" onChange={onFileChange} />
+            </Button>&nbsp;
+
+
+            <Button variant="contained" size="small" onClick={() => clearPhoto()}>Delete Photo</Button><br /><br />
+            <b>Name:</b><br />
+            <TextField id="nameInput" placeholder="Name (Required)" value={nameInput}
+                onChange={(event) => {setNameInput(event.target.value)}} size="small" required/>
+          </Grid>
+          <Grid item xs={3} >
+            <b>Features:</b><br />
+              <TextField id="feature1Input" placeholder="Feature 1" value={feature1Input}
+                  onChange={(event) => {setFeature1Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature2Input" placeholder="Feature 2" value={feature2Input}
+                  onChange={(event) => {setFeature2Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature3Input" placeholder="Feature 3" value={feature3Input}
+                  onChange={(event) => {setFeature3Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature4Input" placeholder="Feature 4" value={feature4Input}
+                  onChange={(event) => {setFeature4Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature5Input" placeholder="Feature 5" value={feature5Input}
+                  onChange={(event) => {setFeature5Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature6Input" placeholder="Feature 6" value={feature6Input}
+                  onChange={(event) => {setFeature6Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature7Input" placeholder="Feature 7" value={feature7Input}
+                  onChange={(event) => {setFeature7Input(event.target.value)}} size="small" margin="dense" /><br />
+              <TextField id="feature8Input" placeholder="Feature 8" value={feature8Input}
+                  onChange={(event) => {setFeature8Input(event.target.value)}} size="small" margin="dense" /><br />
+          </Grid>
+          <Grid item xs={3} >
+            <b>Notes:</b><br />
+            <TextField id="note1Input" placeholder="Note 1" value={note1Input}
+                onChange={(event) => {setNote1Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note2Input" placeholder="Note 2" value={note2Input}
+                onChange={(event) => {setNote2Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note3Input" placeholder="Note 3" value={note3Input}
+                onChange={(event) => {setNote3Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note4Input" placeholder="Note 4" value={note4Input}
+                onChange={(event) => {setNote4Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note5Input" placeholder="Note 5" value={note5Input}
+                onChange={(event) => {setNote5Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note6Input" placeholder="Note 6" value={note6Input}
+                onChange={(event) => {setNote6Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note7Input" placeholder="Note 7" value={note7Input}
+                onChange={(event) => {setNote7Input(event.target.value)}} size="small" margin="dense" /><br />
+            <TextField id="note8Input" placeholder="Note 8" value={note8Input}
+                onChange={(event) => {setNote8Input(event.target.value)}} size="small" margin="dense" /><br />
+          </Grid>
+          <Grid item xs={3} >
+            <Button variant="contained" type="submit">Create Gear Listing</Button>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );
