@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
-
+import TextField from '@mui/material/TextField';
 
 function EditableNote ({initialValue, noteKey }) {
     const dispatch = useDispatch();
@@ -45,8 +45,8 @@ function EditableNote ({initialValue, noteKey }) {
                 <div>
                     {isEditing ?
                     <>
-                        <input type="text" value={noteInputValue || ''} onChange={(event) => {setNoteInputValue(event.target.value)}}
-                        onKeyDown={handleEdit} placeholder="Note"/>
+                        <TextField type="text" value={noteInputValue || ''} onChange={(event) => {setNoteInputValue(event.target.value)}}
+                        onKeyDown={handleEdit} placeholder="Note" size="small" />&nbsp;
                         <Button onClick={handleEdit} variant="contained" size="small" >Save</Button>&nbsp;
                         <Button onClick={() => setIsEditing(false)} variant="contained" size="small" >Cancel</Button>
                     </>
@@ -61,8 +61,8 @@ function EditableNote ({initialValue, noteKey }) {
             :
             (
                 <div>
-                    <input type="text" value={addNoteValue || ''} onChange={(event) => {setAddNoteValue(event.target.value)}}
-                        onKeyDown={handleAddNote} placeholder="Note"/>
+                    <TextField type="text" value={addNoteValue || ''} onChange={(event) => {setAddNoteValue(event.target.value)}}
+                        onKeyDown={handleAddNote} placeholder="Note" size="small" />&nbsp;
                     <Button onClick={handleAddNote} variant="contained" size="small" >Add</Button>
                 </div>
             )}

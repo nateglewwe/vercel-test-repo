@@ -150,7 +150,9 @@ function UpdateGearPage(props) {
             {gearNotes}
           </Grid><br />
           <Grid item xs={1}>
-            <input type="button" value="Back to Gear List" onClick={() => history.push(`/gearlist`)}/>
+            <div style={{marginRight: 16}}>
+              <Button variant="contained" size="small" onClick={() => history.push(`/gearlist`)}>Back to Gear List</Button>
+            </div>
           </Grid>
         </Grid>
       </>)}

@@ -1,0 +1,7 @@
+div {
+    /* margin: 0px 0px 0px 0px; */
+    padding: 3px 0px 3px 0px;
+}
+
+/* BE AWARE THIS IS AFFECTING EVERY DIV IN THE ENTIRE REPOSITORY,
+    TRIED MODULARIZING IT TO JUST EditableFeature.jsx BUT THAT DOENS'T SEEM TO WORK WITH MUI COMPONENTS*/

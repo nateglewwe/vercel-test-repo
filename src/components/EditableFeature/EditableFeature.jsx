@@ -5,9 +5,7 @@ import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import styles from './EditableFeature.module.css';
-
-
+import './EditableFeature.css';
 
 function EditableFeature ({initialValue, featureKey }) {
     const dispatch = useDispatch();
@@ -50,9 +48,9 @@ function EditableFeature ({initialValue, featureKey }) {
                     {isEditing ?
                     <>
                         <TextField value={featureInputValue || ''} onChange={(event) => {setFeatureInputValue(event.target.value)}}
-                        onKeyDown={handleEdit} placeholder="Feature" size="small" />
-                        <Button onClick={handleEdit} variant="contained" size="small">Save</Button>&nbsp;
-                        <Button onClick={() => setIsEditing(false)} variant="contained" size="small">Cancel</Button>
+                        onKeyDown={handleEdit} placeholder="Feature" size="small" />&nbsp;
+                        <Button onClick={handleEdit} variant="contained" size="small" >Save</Button>&nbsp;
+                        <Button onClick={() => setIsEditing(false)} variant="contained" size="small" >Cancel</Button>
                     </>
                     :
                     <>
@@ -66,7 +64,7 @@ function EditableFeature ({initialValue, featureKey }) {
             (
                 <div>
                     <TextField value={addFeatureValue || ''} onChange={(event) => {setAddFeatureValue(event.target.value)}}
-                        onKeyDown={handleAddFeature} placeholder="Add Feature" size="small" />
+                        onKeyDown={handleAddFeature} placeholder="Add Feature" size="small" />&nbsp;
                     <Button onClick={handleAddFeature} variant="contained" size="small" >Add</Button>
                 </div>
             )}
