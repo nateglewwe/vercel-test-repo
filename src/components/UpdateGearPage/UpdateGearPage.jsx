@@ -125,21 +125,21 @@ function UpdateGearPage(props) {
             <>
               <input id="nameInput" placeholder="Name" value={nameInput}
                 onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
-              <button onClick={changeName}>Save</button>&nbsp;
-              <button onClick={() => setIsEditing(false)}>Cancel</button>
+              <Button variant="contained" size="small" onClick={changeName}>Save</Button>&nbsp;
+              <Button variant="contained" size="small" onClick={() => setIsEditing(false)}>Cancel</Button>
             </>
             :
             <>
               <span>{gear.name}</span>&nbsp;
-              <button onClick={changeName}>Edit</button>
+              <Button variant="contained" size="small" onClick={changeName}>Edit</Button>
             </>}<br /><br />
             <img src={imagePreview} alt={`Photo of ${gear.name}`} />
             <form onSubmit={sendPhotoToServer}>
               <input type="file" accept="image/*" id="fileUploader" onChange={onFileChange} required/>
-              <button type="submit">Change Photo</button>
+              <Button variant="contained" size="small" type="submit">Change Photo</Button>
               {/* NEED TO ADD CANCEL BUTTON WITH CONDITIONAL RENDERING!---------------------------------------- */}
-            </form>
-            <input type="button" value="Delete Photo" onClick={() => deletePhoto(gear.name)}/><br />
+            </form><br />
+            <Button variant="contained" size="small" onClick={() => deletePhoto(gear.name)}>Delete Photo</Button>
           </Grid>
           <Grid item xs={3}>
             <b>Features:</b>

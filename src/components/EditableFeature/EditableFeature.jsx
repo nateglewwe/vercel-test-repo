@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import Button from '@mui/material/Button';
+
 
 
 function EditableFeature ({initialValue, featureKey }) {
@@ -46,14 +48,14 @@ function EditableFeature ({initialValue, featureKey }) {
                     <>
                         <input type="text" value={featureInputValue || ''} onChange={(event) => {setFeatureInputValue(event.target.value)}}
                         onKeyDown={handleEdit} placeholder="Feature"/>
-                        <button onClick={handleEdit}>Save</button>&nbsp;
-                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                        <Button onClick={handleEdit} variant="contained" size="small">Save</Button>&nbsp;
+                        <Button onClick={() => setIsEditing(false)} variant="contained" size="small">Cancel</Button>
                     </>
                     :
                     <>
                         <span>{initialValue}</span>&nbsp;
-                        <button onClick={handleEdit}>Edit</button>&nbsp;
-                        <button onClick={handleDeleteFeature}>Delete</button>
+                        <Button onClick={handleEdit} variant="contained" size="small" >Edit</Button>&nbsp;
+                        <Button onClick={handleDeleteFeature} variant="contained" size="small" >Delete</Button>
                     </>}
                 </div>
             )
@@ -62,7 +64,7 @@ function EditableFeature ({initialValue, featureKey }) {
                 <div>
                     <input type="text" value={addFeatureValue || ''} onChange={(event) => {setAddFeatureValue(event.target.value)}}
                         onKeyDown={handleAddFeature} placeholder="Add Feature"/>
-                    <button onClick={handleAddFeature}>Add</button>
+                    <Button onClick={handleAddFeature} variant="contained" size="small" >Add</Button>
                 </div>
             )}
         </>
