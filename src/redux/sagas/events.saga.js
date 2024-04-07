@@ -41,10 +41,40 @@ function* fetchEventToUpdate (action) {
     }
 }
 
+function* changeEventDetail (action) {
+    try {
+        //Send eventID, new detail value, and detailKey/detail column number
+        const changeEventDetail = yield axios.put(`/api/user/eventChangeDetail/${action.payload.id}`, action.payload);
+        console.log('ALERT MESSAGE', changeEventDetail.data.alert);
+        
+        //Call fetchEventToUpdate saga to update the DOM after changing detail
+        yield put({ type: 'FETCH_EVENT_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('changeEventDetail saga error:', err);
+    }
+}
+
+function* changeEventContact (action) {
+    try {
+        //Send eventID, new contact value, and contactKey/contact column number
+        const changeEventContact = yield axios.put(`/api/user/eventChangeContact/${action.payload.id}`, action.payload);
+        console.log('ALERT MESSAGE', changeEventContact.data.alert);
+        
+        //Call fetchEventToUpdate saga to update the DOM after changing detail
+        yield put({ type: 'FETCH_EVENT_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('changeEventDetail saga error:', err);
+    }
+}
+
 function* eventsSaga() {
     yield takeLatest('FETCH_EVENTS', fetchEvents);
     yield takeLatest('DELETE_EVENT', deleteEvent);
     yield takeLatest('FETCH_EVENT_TO_UPDATE', fetchEventToUpdate);
+    yield takeLatest('UPDATE_EVENT_DETAIL', changeEventDetail);
+    yield takeLatest('UPDATE_EVENT_CONTACT', changeEventContact);
   }
   
   export default eventsSaga;

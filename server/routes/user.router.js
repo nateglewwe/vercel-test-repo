@@ -169,7 +169,7 @@ router.put('/gearChangeFeature/:id', (req, res) => {
           console.log('ERROR in changing gear feature server route:', err);
           res.sendStatus(500);
         });
-  } else {console.log('DID NOT PASS THE SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
+  } else {console.log('DID NOT PASS THE CHANGEFEATURE SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
 });
 
 router.put('/gearChangeNote/:id', (req, res) => {
@@ -192,7 +192,7 @@ router.put('/gearChangeNote/:id', (req, res) => {
     console.log('ERROR in changing gear note server route:', err);
     res.sendStatus(500);
   });
-} else {console.log('DID NOT PASS THE SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
+} else {console.log('DID NOT PASS THE CHANGENOTE SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
 });
 
 router.put('/gearAssignEvent/:id', (req, res) => {
@@ -369,6 +369,49 @@ router.get('/eventtoupdate/:id', (req, res) => {
     console.log('ERROR in GET eventToUpdate server route:', err);
     res.sendStatus(500);
   });
+});
+
+router.put('/eventChangeDetail/:id', (req, res) => {
+  console.log('MADE IT TO SERVER SIDE', req.body);
+  if (['detail_1', 'detail_2', 'detail_3', 'detail_4',
+       'detail_5', 'detail_6', 'detail_7', 'detail_8'].indexOf(req.body.detailKey) !== -1) {
+        const queryText = `
+        UPDATE "event_list"
+        SET ${req.body.detailKey} = $1
+        WHERE "event_list".id = $2;
+        `;
+        const queryArgs = [req.body.detail, req.params.id]
+        pool.query(queryText, queryArgs)
+        .then(result => {
+          console.log('Event with following ID has had detail changed to:', req.params.id, req.body.detailKey, req.body.detail);
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log('ERROR in changing event detail server route:', err);
+          res.sendStatus(500);
+        });
+  } else {console.log('DID NOT PASS THE CHANGEDETAIL SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
+});
+
+router.put('/eventChangeContact/:id', (req, res) => {
+  console.log('MADE IT TO SERVER SIDE', req.body);
+  if (['contact_1', 'contact_2'].indexOf(req.body.contactKey) !== -1) {
+        const queryText = `
+        UPDATE "event_list"
+        SET ${req.body.contactKey} = $1
+        WHERE "event_list".id = $2;
+        `;
+        const queryArgs = [req.body.contact, req.params.id]
+        pool.query(queryText, queryArgs)
+        .then(result => {
+          console.log('Event with following ID has had contact changed to:', req.params.id, req.body.contactKey, req.body.contact);
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log('ERROR in changing event contact server route:', err);
+          res.sendStatus(500);
+        });
+  } else {console.log('DID NOT PASS THE CHANGECONTACT SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
 });
 
 module.exports = router;

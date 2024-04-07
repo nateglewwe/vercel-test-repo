@@ -70,7 +70,7 @@ function* changeGearFeature (action) {
         const changeGearFeature = yield axios.put(`/api/user/gearChangeFeature/${action.payload.id}`, action.payload);
         console.log('ALERT MESSAGE', changeGearFeature.data.alert);
         
-        //Call fetchGearToUpdate saga to update the DOM after changing name
+        //Call fetchGearToUpdate saga to update the DOM after changing feature
         yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
     }
     catch(err) {
