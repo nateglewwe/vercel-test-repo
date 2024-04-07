@@ -18,7 +18,6 @@ const gearToUpdate = (state = {}, action) => {
   }
 }
 
-
   export default combineReducers({
     gearList,
     gearToUpdate,

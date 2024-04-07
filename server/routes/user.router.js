@@ -310,6 +310,8 @@ router.post('/gear', (req, res) => {
   });
 });
 
+//ALL EVENTS SERVER ROUTES ARE BELOW HERE-----------------------------------------------------------
+
 router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"
@@ -342,6 +344,29 @@ router.delete('/events/:id', (req, res) => {
   })
   .catch((err) => {
     console.log('ERROR in DELETE event server route:', err);
+    res.sendStatus(500);
+  });
+});
+
+router.get('/eventtoupdate/:id', (req, res) => {
+  const queryText = `
+    SELECT * FROM "event_list"
+    WHERE "event_list".id = $1;
+  `;
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Event with following ID has been fetched from DB:', req.params.id);
+    if (result.rows && result.rows.length > 0) {
+      //Send back an event as a single object from the result.rows array
+      res.send(result.rows[0])
+    } else {
+      console.log('ERROR event not found');
+      res.sendStatus(500)
+    }
+  })
+  .catch((err) => {
+    console.log('ERROR in GET eventToUpdate server route:', err);
     res.sendStatus(500);
   });
 });

@@ -24,9 +24,9 @@ function UpdateEventPage(props) {
   const eventContacts = contacts.map((contact, index) => <EditableContact initialValue={contact} contactKey = {`contact_${index+1}`} key={index}/>)
   const { eventId } = useParams();
 
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: eventId });
-  // }, []);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_EVENT_TO_UPDATE', payload: eventId });
+  }, []);
 
 
 
