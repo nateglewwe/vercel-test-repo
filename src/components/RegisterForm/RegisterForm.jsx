@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import TextField from '@mui/material/TextField';
+
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +33,9 @@ function RegisterForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
+        <TextField label="Username" size="small" name="username" value={username} required
+          onChange={(event) => setUsername(event.target.value)} />
+        {/* <label htmlFor="username">
           Username:
           <input
             type="text"
@@ -40,10 +44,12 @@ function RegisterForm() {
             required
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
+        </label> */}
       </div>
       <div>
-        <label htmlFor="password">
+        <TextField label="Password" size="small" type="password" name="password" required value={password}
+          onChange={(event) => setPassword(event.target.value)} /> 
+        {/* <label htmlFor="password">
           Password:
           <input
             type="password"
@@ -52,7 +58,7 @@ function RegisterForm() {
             required
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
+        </label> */}
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
