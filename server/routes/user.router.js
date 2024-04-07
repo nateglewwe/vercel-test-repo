@@ -329,4 +329,21 @@ router.get('/events', (req, res) => {
   })
 });
 
+router.delete('/events/:id', (req, res) => {
+  const queryText = `
+  DELETE FROM "event_list"
+  WHERE "event_list".id = $1;
+  `;
+  const queryArgs = [req.params.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Event with following ID has been DELETED from DB:', req.params.id);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in DELETE event server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 module.exports = router;

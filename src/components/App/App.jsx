@@ -127,7 +127,7 @@ function App() {
           <ProtectedRoute
             // logged in shows UpdateEventPage else shows LoginPage
             exact
-            path="/updateevent"
+            path="/updateevent/:eventId"
           >
             <UpdateEventPage />
           </ProtectedRoute>

@@ -17,6 +17,16 @@ function EventListPage(props) {
     dispatch({ type: 'FETCH_EVENTS' });
   }, []);
 
+  function updateBtnClk(eventId, eventName) {
+    console.log('Taking event to update page:', eventName);
+    history.push(`/updateevent/${eventId}`)
+  }
+
+  function deleteBtnClk(eventId, eventName) {
+    console.log('Deleting event:', eventName);
+    dispatch({ type: 'DELETE_EVENT', payload: eventId });
+  }
+
   return (
     <div className="gearListDOM" >
       <h1>Your Events:</h1>
@@ -39,8 +49,8 @@ function EventListPage(props) {
                 <span>{event.name}</span><br /><br />
                 <b>Dates: </b> {/* THIS NEEDS SOME MUI TO MAKE THIS LOOK NICER PROBABLY?------------------------------ */}
                 <span>{event.dates}</span><br /><br />
-                <Button variant="contained" onClick={() => updateBtnClk()}>Update Event</Button>&nbsp;
-                <Button variant="contained" onClick={() => deleteBtnClk()}>Delete Event</Button><br /><br />
+                <Button variant="contained" onClick={() => updateBtnClk(event.id, event.name)}>Update Event</Button>&nbsp;
+                <Button variant="contained" onClick={() => deleteBtnClk(event.id, event.name)}>Delete Event</Button><br /><br />
               </Grid>
               <Grid item xs={3}>
                 <b>Details:</b>
@@ -59,7 +69,6 @@ function EventListPage(props) {
                       </div>
                     )
                 })}
-
               </Grid>
             </Grid><br />
           </div>
