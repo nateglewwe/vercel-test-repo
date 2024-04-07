@@ -69,12 +69,26 @@ function* changeEventContact (action) {
     }
 }
 
+function* changeEventName (action) {
+    try {
+        //Send ID and new name of event to have its name changed
+        yield axios.put(`/api/user/eventChangeName/${action.payload.id}`, action.payload);
+
+        //Call fetchGearToUpdate saga to update the DOM after changing name
+        yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('changeEventName saga error:', err);
+    }
+}
+
 function* eventsSaga() {
     yield takeLatest('FETCH_EVENTS', fetchEvents);
     yield takeLatest('DELETE_EVENT', deleteEvent);
     yield takeLatest('FETCH_EVENT_TO_UPDATE', fetchEventToUpdate);
     yield takeLatest('UPDATE_EVENT_DETAIL', changeEventDetail);
     yield takeLatest('UPDATE_EVENT_CONTACT', changeEventContact);
+    yield takeLatest('CHANGE_EVENT_NAME', changeEventName);
   }
   
   export default eventsSaga;

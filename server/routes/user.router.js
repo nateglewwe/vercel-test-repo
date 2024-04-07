@@ -414,4 +414,22 @@ router.put('/eventChangeContact/:id', (req, res) => {
   } else {console.log('DID NOT PASS THE CHANGECONTACT SERVER ROUTER WHITELIST CHECK'); res.json({alert: 'BAD ACTOR OH NO DO SOMETHING'})}
 });
 
+router.put('/eventChangeName/:id', (req, res) => {
+  const queryText = `
+  UPDATE "event_list"
+  SET name = $2
+  WHERE "event_list".id = $1;
+  `;
+  const queryArgs = [req.params.id, req.body.newName]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Event with following ID has had name changed to:', req.params.id, req.body.name);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in changing event name server route:', err);
+    res.sendStatus(500);
+  });
+});
+
 module.exports = router;

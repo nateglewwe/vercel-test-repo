@@ -28,11 +28,43 @@ function UpdateEventPage(props) {
     dispatch({ type: 'FETCH_EVENT_TO_UPDATE', payload: eventId });
   }, []);
 
+  const changeName = (event) => {
+    if (event.key && event.key !== 'Enter'){
+      return;
+    }
+    if (isEditing === true) {
+      console.log('Changing name of event to:', nameInput );
+      dispatch({ type: 'CHANGE_EVENT_NAME', payload: {newName: nameInput, id: eventId} })
+      setNameInput('')
+    }
+    setIsEditing(!isEditing)
+  }
+
+  const changeDates = () => {
+    //FINISH THIS!------------------------------------------------
+  }
+
+  const assignGear = () => {
+    //FINISH THIS!------------------------------------------------
+  }
+
 
 
   return (
     <div>
-      <h1>Update This Event</h1>
+      <h1>Update This Event:</h1>
+      {event && (<>
+        <Grid container spacing={2} className="gearGridUpdate" >
+          <Grid item xs={3}>
+
+            
+          </Grid>
+
+        
+        
+        
+        </Grid>
+      </>)}
     </div>
   );
 }
