@@ -9,7 +9,7 @@ function EventListPage(props) {
 
   const dispatch = useDispatch();
   const gear = useSelector((store) => store.gear.gearList);
-  const events = useSelector((store) => store.events);
+  const events = useSelector((store) => store.events.eventList);
   const history = useHistory();
 
   useEffect(() => {
