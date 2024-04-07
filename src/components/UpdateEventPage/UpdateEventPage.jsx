@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
 import EditableDetail from '../EditableDetail/EditableDetail';
-
+import EditableContact from '../EditableContact/EditableContact';
 
 function UpdateEventPage(props) {
 
@@ -21,6 +21,13 @@ function UpdateEventPage(props) {
                    event.detail_5, event.detail_6, event.detail_7, event.detail_8]
   const eventDetails = details.map((detail, index) => <EditableDetail initialValue={detail} detailKey = {`detail_${index+1}`} key={index}/>)
   const contacts = [event.contact_1, event.contact_2]
+  const eventContacts = contacts.map((contact, index) => <EditableContact initialValue={contact} contactKey = {`contact_${index+1}`} key={index}/>)
+  const { eventId } = useParams();
+
+  // useEffect(() => {
+  //   dispatch({ type: 'FETCH_GEAR_TO_UPDATE', payload: eventId });
+  // }, []);
+
 
 
   return (
