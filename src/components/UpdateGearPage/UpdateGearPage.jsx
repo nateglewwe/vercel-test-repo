@@ -5,6 +5,7 @@ import axios from 'axios';
 import { readAndCompressImage } from 'browser-image-resizer';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 const VisuallyHiddenInput = styled('input')({
@@ -136,8 +137,8 @@ function UpdateGearPage(props) {
             <b>Name: </b>
             {isEditing ?
             <>
-              <input id="nameInput" placeholder="Name" value={nameInput}
-                onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName}/>
+              <TextField id="nameInput" placeholder="Name" value={nameInput}
+                onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName} size="small" />
               <Button variant="contained" size="small" onClick={changeName}>Save</Button>&nbsp;
               <Button variant="contained" size="small" onClick={() => setIsEditing(false)}>Cancel</Button>
             </>
