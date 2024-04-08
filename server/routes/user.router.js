@@ -316,7 +316,7 @@ router.get('/events', (req, res) => {
   const queryText = `
     SELECT * FROM "event_list"
     WHERE "event_list".user_id = $1
-    ORDER BY "name" ASC;
+    ORDER BY "id" ASC;
   `;
   const queryArgs = [req.user.id]
   pool.query(queryText, queryArgs)
@@ -428,6 +428,32 @@ router.put('/eventChangeName/:id', (req, res) => {
   })
   .catch((err) => {
     console.log('ERROR in changing event name server route:', err);
+    res.sendStatus(500);
+  });
+});
+
+router.post('/events', (req, res) => {
+  console.log('OBJECT FULL OF EVENT ENTRY DATA:', req.body);
+  const queryText = `
+  INSERT INTO "event_list"
+  (name, dates, detail_1, detail_2, detail_3, detail_4, detail_5, detail_6, detail_7, detail_8,
+    contact_1, contact_2, user_id)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);
+    `;
+  const queryArgs = [
+    req.body.name,
+    req.body.dates,
+    req.body.detail1, req.body.detail2, req.body.detail3, req.body.detail4,
+    req.body.detail5, req.body.detail6, req.body.detail7, req.body.detail8,
+    req.body.contact1, req.body.contact2,
+    req.user.id]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('New event with following data has been POSTED to database:', req.body);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in server side POST event route:', err);
     res.sendStatus(500);
   });
 });

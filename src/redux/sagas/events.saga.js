@@ -82,6 +82,19 @@ function* changeEventName (action) {
     }
 }
 
+function* postNewEvent (action) {
+    try {
+        //Send all of the event data to the database for new event entry
+        console.log('THIS IS ALL OF THE NEW EVENT DATA:', action.payload);
+        yield axios.post(`/api/user/events`, action.payload);
+
+        //I don't think this needs to call any other sagas or anything afterwards here?
+    }
+    catch(err) {
+        console.log('postEvent saga error:', err);
+    }
+}
+
 function* eventsSaga() {
     yield takeLatest('FETCH_EVENTS', fetchEvents);
     yield takeLatest('DELETE_EVENT', deleteEvent);
@@ -89,6 +102,7 @@ function* eventsSaga() {
     yield takeLatest('UPDATE_EVENT_DETAIL', changeEventDetail);
     yield takeLatest('UPDATE_EVENT_CONTACT', changeEventContact);
     yield takeLatest('CHANGE_EVENT_NAME', changeEventName);
+    yield takeLatest('POST_NEW_EVENT', postNewEvent);
   }
   
   export default eventsSaga;
