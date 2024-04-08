@@ -97,9 +97,11 @@ function UpdateEventPage(props) {
             <b>Contacts:</b>
             {eventContacts}
           </Grid>
-        
-        
-        
+          <Grid item xs={1}>
+            <div style={{marginRight: 16}}>
+              <Button variant="contained" size="small" onClick={() => history.push(`/eventlist`)}>Back to Event List</Button>
+            </div>
+          </Grid>
         </Grid>
       </>)}
     </div>

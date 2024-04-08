@@ -18,6 +18,8 @@ function GearListPage(props) {
   const gear = useSelector((store) => store.gear.gearList);
   const events = useSelector((store) => store.events.eventList);
   const history = useHistory();
+  // const [prevEventId, setPrevEventId] = useState(tool.event_id || '');
+
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR' });
@@ -34,15 +36,15 @@ function GearListPage(props) {
     dispatch({ type: 'DELETE_GEAR', payload: toolId });
   }
 
-  // const assignToEvent = (toolId, eventId) => {
-  //   //Dispatching event assignement for piece of gear to gear_list table in DB
-  //   if (eventId === '') {
-  //     dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: null}});
-  //     dispatch({ type: 'ADD_TO_EVENT_GEARLIST', payload: {id: null, eventId: null}});
-  //   } else {
-  //     dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: eventId}});
-  //   }
-  // };
+  const assignToEvent = (toolId, eventId) => {
+    //Dispatching event assignement for piece of gear to gear_list table in DB
+    if (eventId === '') {
+      dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: null}});
+      // dispatch({ type: 'ADD_TO_EVENT_GEARLIST', payload: {id: null, eventId: null}});
+    } else {
+      dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: eventId}});
+    }
+  };
 
   return (
     <div className="gearListDOM" >
@@ -52,21 +54,20 @@ function GearListPage(props) {
                           tool.feature_5, tool.feature_6, tool.feature_7, tool.feature_8];
         const notes = [tool.note_1, tool.note_2, tool.note_3, tool.note_4,
                        tool.note_5, tool.note_6, tool.note_7, tool.note_8];
-        const [prevEventId, setPrevEventId] = useState(tool.event_id || '');
 
-        const assignToEvent = (toolId, eventId) => {
-          console.log('PREVIOUS INTERATION OF tool.event_id:', prevEventId);
-          //Dispatching event assignement for piece of gear to gear_list table in DB
-          //ALSO dispatching gear assignment to event_list table in DB
-          if (eventId === '') {
-            dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: null}});
-            // dispatch({ type: 'ADD_TO_EVENT_GEARLIST', payload: {id: null, eventId: prevEventId}});
-          } else {
-            dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: eventId}});
-          }
-          setPrevEventId(tool.event_id || '')
-          console.log('NEXT INTERATION OF tool.event_id:', prevEventId);
-        };
+        // const assignToEvent = (toolId, eventId) => {
+        //   console.log('PREVIOUS INTERATION OF tool.event_id:', prevEventId);
+        //   //Dispatching event assignement for piece of gear to gear_list table in DB
+        //   //ALSO dispatching gear assignment to event_list table in DB
+        //   if (eventId === '') {
+        //     dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: null}});
+        //     // dispatch({ type: 'ADD_TO_EVENT_GEARLIST', payload: {id: null, eventId: prevEventId}});
+        //   } else {
+        //     dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: eventId}});
+        //   }
+        //   setPrevEventId(tool.event_id || '')
+        //   console.log('NEXT INTERATION OF tool.event_id:', prevEventId);
+        // };
 
           return (
             <div key={tool.id}>
