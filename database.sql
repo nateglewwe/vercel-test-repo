@@ -34,7 +34,7 @@ CREATE TABLE "gear_list" (
 CREATE TABLE "event_list" (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (128) NOT NULL,
-	"dates" DATERANGE NOT NULL,
+	"dates" DATE NOT NULL,
 	"detail_1" VARCHAR (128),
 	"detail_2" VARCHAR (128),
 	"detail_3" VARCHAR (128),
