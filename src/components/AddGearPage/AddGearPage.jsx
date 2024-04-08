@@ -110,7 +110,7 @@ function AddGearPage(props) {
     } });
     // clearForm();
     // getPhoto();
-    // Add history.push back to gear list page?
+    // Add history.push back to gear list page? Or success alert?
   }
 
   return (
@@ -186,54 +186,3 @@ function AddGearPage(props) {
 }
 
 export default AddGearPage;
-
-// const updateKeyValue = (key, newValue) => {
-//   setState(prevState => ({
-//     ...prevState,
-//     [key]: newValue
-//   }));
-// };
-
-const changeFeature = (featureNum, newValue) => {
-  if (featureNum === 1) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature1: newValue
-    }));
-  } else if (featureNum === 2) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature2: newValue
-    }));
-  } else if (featureNum === 3) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature3: newValue
-    }));
-  } else if (featureNum === 4) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature4: newValue
-    }));
-  } else if (featureNum === 5) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature5: newValue
-    }));
-  } else if (featureNum === 6) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature6: newValue
-    }));
-  } else if (featureNum === 7) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature7: newValue
-    }));
-  } else if (featureNum === 8) {
-    setFeatures(prevState => ({
-      ...prevState,
-      feature8: newValue
-    }));
-  } 
-}
