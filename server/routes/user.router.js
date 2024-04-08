@@ -423,11 +423,29 @@ router.put('/eventChangeName/:id', (req, res) => {
   const queryArgs = [req.params.id, req.body.newName]
   pool.query(queryText, queryArgs)
   .then(result => {
-    console.log('Event with following ID has had name changed to:', req.params.id, req.body.name);
+    console.log('Event with following ID has had name changed to:', req.params.id, req.body.newName);
     res.sendStatus(200);
   })
   .catch((err) => {
     console.log('ERROR in changing event name server route:', err);
+    res.sendStatus(500);
+  });
+});
+
+router.put('/eventChangeDates/:id', (req, res) => {
+  const queryText = `
+  UPDATE "event_list"
+  SET dates = $2
+  WHERE "event_list".id = $1;
+  `;
+  const queryArgs = [req.params.id, req.body.newDates]
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Event with following ID has had dates changed to:', req.params.id, req.body.newDates);
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in changing event dates server route:', err);
     res.sendStatus(500);
   });
 });

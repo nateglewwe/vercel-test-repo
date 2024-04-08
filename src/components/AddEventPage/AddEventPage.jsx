@@ -16,7 +16,6 @@ function AddEventPage(props) {
   const dispatch = useDispatch();
 
   const [nameInput, setNameInput] = useState('');  //Stores name of event to be added
-  //ADD ANOTHER USESTATE HERE FOR DATES? OR HOWEVER DATES ARE HANDLED?------------------------------------
   const [datesInput, setDatesInput] = useState(dayjs());
   const [detail1Input, setDetail1Input] = useState('');  //Stores value of feature
   const [detail2Input, setDetail2Input] = useState('');
@@ -58,20 +57,11 @@ function AddEventPage(props) {
             <b>Name:</b><br />
             <TextField id="nameInput" placeholder="Name (Required)" value={nameInput}
               onChange={(event) => {setNameInput(event.target.value)}} size="small" required/><br /><br />
-
-
-
-            <p className="dateText" >Dates:</p>
+            <p className="dateText" >Date:</p>
             <LocalizationProvider dateAdapter={AdapterDayjs} >
               <DatePicker label="Date (Required)" id="datesInput" value={datesInput}
                 onChange={(newDatesInput) => {setDatesInput(newDatesInput)}} required />
             </LocalizationProvider>
-
-            {/* <TextField id="datesInput" placeholder="Dates (Required)" value={datesInput}
-              onChange={(event) => {setDatesInput(event.target.value)}} size="small" required/> */}
-
-
-
           </Grid>
           <Grid item xs={3} >
             <b>Details:</b><br />

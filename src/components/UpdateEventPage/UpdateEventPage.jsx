@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
+import dayjs from 'dayjs'; //This is for the DatePicker
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'; //This is for the DatePicker
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'; //This is for the DatePicker
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import EditableDetail from '../EditableDetail/EditableDetail';
 import EditableContact from '../EditableContact/EditableContact';
@@ -16,7 +20,7 @@ function UpdateEventPage(props) {
   const history = useHistory();
   const event = useSelector((store) => store.events.eventToUpdate);
   const [nameInput, setNameInput] = useState(event.name);
-  //ADD ANOTHER USESTATE HERE FOR DATES? OR HOWEVER DATES ARE HANDLED?
+  const [datesInput, setDatesInput] = useState(dayjs());
   let [isEditingName, setIsEditingName] = useState(false);
   let [isEditingDates, setIsEditingDates] = useState(false);
   const details = [event.detail_1, event.detail_2, event.detail_3, event.detail_4,
@@ -43,7 +47,9 @@ function UpdateEventPage(props) {
   }
 
   const changeDates = () => {
-    //FINISH THIS!------------------------------------------------
+    console.log('Changing dates of event to this object:', datesInput );
+    dispatch({ type: 'CHANGE_EVENT_DATES', payload: {newDates: datesInput, id: eventId}})
+    // setDatesInput(dayjs()) DO I NEED THIS LINE OF CODE?
     setIsEditingDates(!isEditingDates)
   }
 
@@ -73,13 +79,13 @@ function UpdateEventPage(props) {
             <Button variant="contained" size="small" onClick={changeName}>Edit</Button>
           </>}<br /><br />
 
-          <b>Dates: </b>
+          <p className="dateText" >Date:</p>
           {isEditingDates ?
           <>
-            <span>PUT A DATE PICKER TOOL HERE</span>
-            {/* FINISH THIS------------------------------------------------------------------------------------ */}
-            <TextField id="nameInput" placeholder="Name" value={nameInput}
-              onChange={(event) => {setNameInput(event.target.value)}} onKeyDown={changeName} size="small" disabled/>
+            <LocalizationProvider dateAdapter={AdapterDayjs} >
+              <DatePicker label="Date (Required)" id="datesInput" value={datesInput}
+                onChange={(newDatesInput) => {setDatesInput(newDatesInput)}} required />
+            </LocalizationProvider>
             <Button variant="contained" size="small" onClick={changeDates}>Save</Button>&nbsp;
             <Button variant="contained" size="small" onClick={() => setIsEditingDates(false)}>Cancel</Button>
           </>

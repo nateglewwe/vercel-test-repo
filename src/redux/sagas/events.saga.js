@@ -82,6 +82,19 @@ function* changeEventName (action) {
     }
 }
 
+function* changeEventDates (action) {
+    try {
+        //Send ID and new dates of event to have them changed
+        yield axios.put(`/api/user/eventChangeDates/${action.payload.id}`, action.payload);
+
+        //Call fetchGearToUpdate saga to update the DOM after changing dates
+        yield put({ type: 'FETCH_GEAR_TO_UPDATE', payload: action.payload.id });
+    }
+    catch(err) {
+        console.log('changeEventName saga error:', err);
+    }
+}
+
 function* postNewEvent (action) {
     try {
         //Send all of the event data to the database for new event entry
@@ -102,6 +115,7 @@ function* eventsSaga() {
     yield takeLatest('UPDATE_EVENT_DETAIL', changeEventDetail);
     yield takeLatest('UPDATE_EVENT_CONTACT', changeEventContact);
     yield takeLatest('CHANGE_EVENT_NAME', changeEventName);
+    yield takeLatest('CHANGE_EVENT_DATES', changeEventDates);
     yield takeLatest('POST_NEW_EVENT', postNewEvent);
   }
   
