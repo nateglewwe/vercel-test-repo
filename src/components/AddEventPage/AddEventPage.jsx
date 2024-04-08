@@ -43,8 +43,21 @@ function AddEventPage(props) {
   }
 
   return (
-    <div>
-      <h2>{heading}</h2>
+    <div className="updateGearDOM" >
+      <form onSubmit={addEventToList} >
+        <h1>Add Event:</h1>
+        <Grid container spacing={2} className="gearGridUpdate" >
+          <Grid item xs={3}>
+            <b>Name:</b><br />
+            <TextField id="nameInput" placeholder="Name (Required)" value={nameInput}
+              onChange={(event) => {setNameInput(event.target.value)}} size="small" required/><br /><br />
+            <b>Dates:</b><br />
+            {/* GET A DATE PICKER THING IN HERE--------------------------------------------------------- */}
+          </Grid>
+
+
+        </Grid>
+      </form>
     </div>
   );
 }
