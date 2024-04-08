@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import Button from '@mui/material/Button';//Listo f MUI imports
+import Button from '@mui/material/Button';//List of MUI imports
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'; //This is for the DatePicker
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'; //This is for the DatePicker
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+import './AddEventPage.css';
 
 function AddEventPage(props) {
 
@@ -52,7 +57,14 @@ function AddEventPage(props) {
             <b>Name:</b><br />
             <TextField id="nameInput" placeholder="Name (Required)" value={nameInput}
               onChange={(event) => {setNameInput(event.target.value)}} size="small" required/><br /><br />
-            <b>Dates:</b><br />
+            <p className="dateText" >Dates:</p>
+            <LocalizationProvider dateAdapter={AdapterDayjs} >
+              <DatePicker label="Date" />
+            </LocalizationProvider>
+
+
+
+
             {/* GET A DATE PICKER THING IN HERE--------------------------------------------------------- */}
             <TextField id="datesInput" placeholder="Dates (Required)" value={datesInput}
               onChange={(event) => {setDatesInput(event.target.value)}} size="small" required/>
