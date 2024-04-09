@@ -54,11 +54,14 @@ function UpdateEventPage(props) {
     setIsEditingDates(!isEditingDates)
   }
 
+  const formatDate = (datetime) => {
+    const returnDate = new Date(datetime);
+    return returnDate.toLocaleDateString();
+  }
+
   const assignGear = () => {
     //FINISH THIS!------------------------------------------------
   }
-
-
 
   return (
     <div className="updateGearDOM" >
@@ -92,7 +95,7 @@ function UpdateEventPage(props) {
           </>
           :
           <>
-            <span>{event.dates}</span>&nbsp;
+            <span>{formatDate(event.dates)}</span>&nbsp;
             <Button variant="contained" size="small" onClick={changeDates}>Edit</Button>
           </>}
           </Grid>

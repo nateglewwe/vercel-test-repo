@@ -27,6 +27,11 @@ function EventListPage(props) {
     dispatch({ type: 'DELETE_EVENT', payload: eventId });
   }
 
+  const formatDate = (datetime) => {
+    const returnDate = new Date(datetime);
+    return returnDate.toLocaleDateString();
+  }
+
   return (
     <div className="gearListDOM" >
       <h1>Your Events:</h1>
@@ -40,15 +45,14 @@ function EventListPage(props) {
               gearPiece.id === event.gear_7_id || gearPiece.id === event.gear_8_id)
             {return true}
           return false})
-
         return (
           <div key={event.id}>
             <Grid container spacing={2} className="gearGridList" >
               <Grid item xs={3}>
                 <b>Name: </b>
                 <span>{event.name}</span><br /><br />
-                <b>Dates: </b> {/* THIS NEEDS SOME MUI TO MAKE THIS LOOK NICER PROBABLY?------------------------------ */}
-                <span>{event.dates}</span><br /><br />
+                <b>Date: </b>
+                <span>{formatDate(event.dates)}</span><br /><br />
                 <Button variant="contained" onClick={() => updateBtnClk(event.id, event.name)}>Update Event</Button>&nbsp;
                 <Button variant="contained" onClick={() => deleteBtnClk(event.id, event.name)}>Delete Event</Button><br /><br />
               </Grid>
