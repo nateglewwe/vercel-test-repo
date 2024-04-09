@@ -50,6 +50,7 @@ function UpdateEventPage(props) {
     console.log('Changing dates of event to this object:', datesInput );
     dispatch({ type: 'CHANGE_EVENT_DATES', payload: {newDates: datesInput, id: eventId}})
     // setDatesInput(dayjs()) DO I NEED THIS LINE OF CODE?
+    // THIS FUNCTION DOESN'T SEEM TO BE RENDERING THE NEW DATES UNTIL I RELOAD THE PAGE, NOT SURE WHY??
     setIsEditingDates(!isEditingDates)
   }
 

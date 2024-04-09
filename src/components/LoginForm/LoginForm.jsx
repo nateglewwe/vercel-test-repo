@@ -4,6 +4,8 @@ import {useSelector} from 'react-redux';
 
 import TextField from '@mui/material/TextField';
 
+import './LoginForm.css';
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,14 +29,14 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <form className="formPanel" onSubmit={login} >
+      <h2 className="loginText" >Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
-      <div>
+      <div className="loginText" >
         <TextField label="Username" size="small" name="username" required value={username}
             onChange={(event) => setUsername(event.target.value)} />
         {/* <label htmlFor="username">
@@ -48,7 +50,7 @@ function LoginForm() {
           />
         </label> */}
       </div>
-      <div>
+      <div className="loginText" >
         <TextField label="Password" size="small" type="password" name="password" required value={password}
             onChange={(event) => setPassword(event.target.value)} />
         {/* <label htmlFor="password">
@@ -62,7 +64,7 @@ function LoginForm() {
           />
         </label> */}
       </div>
-      <div>
+      <div className="loginText" >
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>

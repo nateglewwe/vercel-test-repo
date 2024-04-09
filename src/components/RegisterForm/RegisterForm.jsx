@@ -26,13 +26,13 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2 className="loginText" >Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
-      <div>
+      <div className="loginText" >
         <TextField label="Username" size="small" name="username" value={username} required
           onChange={(event) => setUsername(event.target.value)} />
         {/* <label htmlFor="username">
@@ -46,7 +46,7 @@ function RegisterForm() {
           />
         </label> */}
       </div>
-      <div>
+      <div className="loginText" >
         <TextField label="Password" size="small" type="password" name="password" required value={password}
           onChange={(event) => setPassword(event.target.value)} /> 
         {/* <label htmlFor="password">
@@ -60,7 +60,7 @@ function RegisterForm() {
           />
         </label> */}
       </div>
-      <div>
+      <div className="loginText" >
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>

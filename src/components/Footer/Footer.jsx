@@ -6,8 +6,10 @@ import './Footer.css';
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is
 
+//&copy; Prime Digital Academy
+
 function Footer() {
-  return <footer>&copy; Prime Digital Academy</footer>;
+  return <footer></footer>;
 }
 
 export default Footer;
