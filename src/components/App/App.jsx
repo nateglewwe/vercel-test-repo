@@ -174,10 +174,10 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/gearlist" />
               :
-              // Otherwise, show the Landing page
-              <LandingPage />
+              // Otherwise, show the Login page
+              <LoginPage />
             }
           </Route>
 
