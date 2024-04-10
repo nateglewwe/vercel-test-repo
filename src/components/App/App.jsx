@@ -138,8 +138,8 @@ function App() {
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/user" />
+              // redirect to the /gearlist page
+              <Redirect to="/gearlist" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -152,8 +152,8 @@ function App() {
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
+              // redirect them to the /gearlist page
+              <Redirect to="/gearlist" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -173,7 +173,7 @@ function App() {
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect them to the /user page
+              // redirect them to the /gearlist page
               <Redirect to="/gearlist" />
               :
               // Otherwise, show the Login page
