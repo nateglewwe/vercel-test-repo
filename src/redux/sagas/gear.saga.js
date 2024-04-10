@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import Swal from 'sweetalert2';
 
 function* fetchGear (action) {
     try {
@@ -119,7 +120,13 @@ function* postNewGear (action) {
         console.log('THIS IS ALL OF THE NEW GEAR DATA:', action.payload.dataForDB);
         yield axios.post(`/api/user/gear`, action.payload.dataForDB);
 
-        //I don't think this needs to call any other sagas or anything afterwards here?
+        //Sweetalert to confirm success to user
+        yield Swal.fire({
+            title: 'Success!',
+            text: 'You created a piece of gear',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
     }
     catch(err) {
         console.log('postGear saga error:', err);
