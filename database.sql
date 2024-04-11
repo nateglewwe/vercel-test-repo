@@ -68,17 +68,17 @@ VALUES
 '32 XLR inputs','6 TRS 1/4” inputs', '16 XLR outputs', '4 effects racks', null, null, null, null,
 'Ch 9 thumbnail screen needs repair', null, null, null, null, null, null, null,
 null,
-1)
+1),
 ('QSC K12.2 Speakers (Pair)',
 'Powered','2 XLR inputs', '1 1/8” input', '3 XLR outputs', null, null, null, null,
 null, null, null, null, null, null, null, null,
 null,
-1)
+1),
 ('Midas MR18',
 '16 XLR inputs','2 TRS inputs', '8 XLR outputs', 'Network port', null, null, null, null,
 'Use with Wi-Fi router', 'Can be rack mounted', 'Include IEC cable', null, null, null, null, null,
 null,
-1)
+1),
 ('Shure Beta 58A Mic',
 'Handheld Dynamic Mic','Supercardioid polar pattern', '50Hz-16kHz Frequency Response', null, null, null, null, null,
 'DO NOT DROP THE MIC!', null, null, null, null, null, null, null,
@@ -99,21 +99,21 @@ VALUES
 '2pm arrival', 'Setup by 4pm', 'Mics for MC and Pastor', 'Client provides playlist', null, null, null, null,
 'tony@gmail.com', null,
  2, 3, null, null, null, null, null, null,
- 1)
+ 1),
  
 ('Skylark Opera Pop-Up Concert',
 '[2024-07-07, 2024-07-07]',
 '1pm arrival', 'Setup by 2pm', 'Four singers this time', 'Keyboard into mixer', null, null, null, null,
 'angie@gmail.com', null,
  4, 3, null, null, null, null, null, null,
- 2)
+ 2),
  
  ('SOAR Arts Finding Nemo Jr',
 '[2024-02-10, 2024-02-18]',
 'Load-in Friday evening', 'Demo mics for kids', 'Tech all day Sunday', 'Just keep swimming!', null, null, null, null,
 'terry@gmail.com', null,
  2, 3, null, null, null, null, null, null,
- 2)
+ 2),
  
  ('Greg borrows my speakers',
 '[2024-08-01, 2024-08-01]',
