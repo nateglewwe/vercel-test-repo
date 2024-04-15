@@ -38,9 +38,9 @@ function GearListPage(props) {
 
   const assignToEvent = (toolId, eventId) => {
     //Dispatching event assignement for piece of gear to gear_list table in DB
+    //NEED TO CREATE A 'REMOVE_FROM_OTHER_EVENTS' DISPATCH TO GO WITH THIS
     if (eventId === '') {
       dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: null}});
-      // dispatch({ type: 'ADD_TO_EVENT_GEARLIST', payload: {id: null, eventId: null}});
     } else {
       dispatch({ type: 'ASSIGN_TO_EVENT', payload: {id: toolId, eventId: eventId}});
     }

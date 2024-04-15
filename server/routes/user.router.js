@@ -450,6 +450,24 @@ router.put('/eventChangeDates/:id', (req, res) => {
   });
 });
 
+router.put('/eventChangeGear/:id', (req, res) => { //FINISH THIS--------------------------------------
+  const queryText = `
+  UPDATE "event_list"
+  SET
+  `;
+  const queryArgs = [req.params.id, req.body.newDates] //EDIT THIS LINE TO USE CORRECT DATA
+  pool.query(queryText, queryArgs)
+  .then(result => {
+    console.log('Event with following ID has had gear changed to:', req.params.id, req.body.newDates); //THIS TOO
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log('ERROR in changing event gear server route:', err);
+    res.sendStatus(500);
+  });
+});
+
+
 router.post('/events', (req, res) => {
   console.log('OBJECT FULL OF EVENT ENTRY DATA:', req.body);
   const queryText = `
