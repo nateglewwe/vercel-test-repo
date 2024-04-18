@@ -450,15 +450,33 @@ router.put('/eventChangeDates/:id', (req, res) => {
   });
 });
 
-router.put('/eventChangeGear/:id', (req, res) => { //FINISH THIS--------------------------------------
+router.put('/eventChangeGear/:id', (req, res) => { //DOUBLE-CHECK THIS--------------------------------------
   const queryText = `
+  UPDATE "event_list" SET gear_1_id = null WHERE gear_1_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_2_id = null WHERE gear_2_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_3_id = null WHERE gear_3_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_4_id = null WHERE gear_4_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_5_id = null WHERE gear_5_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_6_id = null WHERE gear_6_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_7_id = null WHERE gear_7_id = THE GEAR ID;
+  UPDATE "event_list" SET gear_8_id = null WHERE gear_8_id = THE GEAR ID;
+
   UPDATE "event_list"
-  SET
+  SET gear_1_id = THE GEAR ID
+  WHERE "event_list".id = THE EVENT ID;
+
+  UPDATE "gear_list"
+  SET event_id = null
+  WHERE event_id = THE EVENT ID;
+
+  UPDATE "gear_list"
+  SET event_id = THE EVENT ID
+  WHERE "gear_list".id = THE GEAR ID;
   `;
-  const queryArgs = [req.params.id, req.body.newDates] //EDIT THIS LINE TO USE CORRECT DATA
+  const queryArgs = [req.params.id, req.body.toolId]
   pool.query(queryText, queryArgs)
   .then(result => {
-    console.log('Event with following ID has had gear changed to:', req.params.id, req.body.newDates); //THIS TOO
+    console.log('Event with following ID has had gear changed to toolId:', req.params.id, req.body.toolId);
     res.sendStatus(200);
   })
   .catch((err) => {
@@ -466,7 +484,6 @@ router.put('/eventChangeGear/:id', (req, res) => { //FINISH THIS----------------
     res.sendStatus(500);
   });
 });
-
 
 router.post('/events', (req, res) => {
   console.log('OBJECT FULL OF EVENT ENTRY DATA:', req.body);
