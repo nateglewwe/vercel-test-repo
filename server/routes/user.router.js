@@ -197,6 +197,23 @@ router.put('/gearChangeNote/:id', (req, res) => {
 
 router.put('/gearAssignEvent/:id', (req, res) => {
   const queryText = `
+  UPDATE "event_list" SET gear_1_id = null WHERE gear_1_id = $1;
+  UPDATE "event_list" SET gear_2_id = null WHERE gear_2_id = $1;
+  UPDATE "event_list" SET gear_3_id = null WHERE gear_3_id = $1;
+  UPDATE "event_list" SET gear_4_id = null WHERE gear_4_id = $1;
+  UPDATE "event_list" SET gear_5_id = null WHERE gear_5_id = $1;
+  UPDATE "event_list" SET gear_6_id = null WHERE gear_6_id = $1;
+  UPDATE "event_list" SET gear_7_id = null WHERE gear_7_id = $1;
+  UPDATE "event_list" SET gear_8_id = null WHERE gear_8_id = $1;
+
+  UPDATE "event_list"
+  SET gear_1_id = $1
+  WHERE "event_list".id = $2;
+
+  UPDATE "gear_list"
+  SET event_id = null
+  WHERE event_id = $2;
+
   UPDATE "gear_list"
   SET event_id = $2
   WHERE "gear_list".id = $1;
