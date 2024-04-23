@@ -90,9 +90,3 @@ This version uses React, Redux, Node, Express, Passport, and PostgreSQL (a full 
 
 - Prime Digital Academy, particularly Myron Schippers, Carlos Kelley, Chris Black, and all my Titanite cohort classmates
 - Hawken Rives
-
-## Notes from Nathaniel:
-- Used npm install @aws-sdk/client-s3 for S3 photo storage
-- Used npm install express-fileupload in order to upload files with AWS S3
-- Used npm install browser-image-resizer
-
