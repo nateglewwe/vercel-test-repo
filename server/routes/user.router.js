@@ -214,7 +214,6 @@ router.put('/gearChangeNote/:id', (req, res) => {
 
 router.put('/gearAssignEvent/:id', (req, res) => {
   const queryText = `
-
   UPDATE "gear_list"
   SET event_id = $2
   WHERE "gear_list".id = $1;
