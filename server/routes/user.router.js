@@ -196,14 +196,19 @@ router.put('/gearChangeNote/:id', (req, res) => {
 });
 
 router.put('/gearAssignEvent/:id', (req, res) => {
-  const nullOutGear1Query = `UPDATE "event_list" SET gear_1_id = null WHERE gear_1_id = $1;`;
-  // const nullOutGear2Query = `UPDATE "event_list" SET gear_2_id = null WHERE gear_2_id = $1;`;
-  // const nullOutGear3Query = `UPDATE "event_list" SET gear_3_id = null WHERE gear_3_id = $1;`;
-  // const nullOutGear4Query = `UPDATE "event_list" SET gear_4_id = null WHERE gear_4_id = $1;`;
-  // const nullOutGear5Query = `UPDATE "event_list" SET gear_5_id = null WHERE gear_5_id = $1;`;
-  // const nullOutGear6Query = `UPDATE "event_list" SET gear_6_id = null WHERE gear_6_id = $1;`;
-  // const nullOutGear7Query = `UPDATE "event_list" SET gear_7_id = null WHERE gear_7_id = $1;`;
-  // const nullOutGear8Query = `UPDATE "event_list" SET gear_8_id = null WHERE gear_8_id = $1;`;
+  const nullOutGear1Query = `
+  UPDATE event_list
+  SET
+  gear_1_id = CASE WHEN gear_1_id = $1 THEN NULL ELSE gear_1_id END,
+  gear_2_id = CASE WHEN gear_2_id = $1 THEN NULL ELSE gear_2_id END,
+  gear_3_id = CASE WHEN gear_3_id = $1 THEN NULL ELSE gear_3_id END,
+  gear_4_id = CASE WHEN gear_4_id = $1 THEN NULL ELSE gear_4_id END,
+  gear_5_id = CASE WHEN gear_5_id = $1 THEN NULL ELSE gear_5_id END,
+  gear_6_id = CASE WHEN gear_6_id = $1 THEN NULL ELSE gear_6_id END,
+  gear_7_id = CASE WHEN gear_7_id = $1 THEN NULL ELSE gear_7_id END,
+  gear_8_id = CASE WHEN gear_8_id = $1 THEN NULL ELSE gear_8_id END
+  WHERE $1 IN (gear_1_id, gear_2_id, gear_3_id, gear_4_id, gear_5_id, gear_6_id, gear_7_id, gear_8_id);
+  `;
   const nullOutGear1QueryArg = [req.params.id]
 
   const setGearForEventQuery = `
