@@ -27,7 +27,7 @@ SERVER_SESSION_SECRET=superDuperSecret
 
 While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [Password Generator Plus](https://passwordsgenerator.net). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
 
-You'll also need to setup an Amazon Web Services Simple Storage Service (AWS S3) bucket to host your photos, see [AWS_S3] (https://aws.amazon.com/s3/) to create an account and a bucket. This will give you API key information to put in your .env file like so:
+You'll also need to setup an Amazon Web Services Simple Storage Service (AWS S3) bucket to host your photos, see [AWS_S3](https://aws.amazon.com/s3/) to create an account and a bucket. This will give you API key information to put in your .env file like so:
 
 ```plaintext
 AWS_REGION=
