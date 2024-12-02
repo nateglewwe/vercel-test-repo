@@ -76,9 +76,9 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 ## Built With
 
-- [React] (https://react.dev/) - JavaScript Library
-- [Node.js] (https://nodejs.org/en) - Server Runtime Environment
-- [Express.js] (https://expressjs.com/) - Web Framework
+- [React](https://react.dev/) - JavaScript Library
+- [Node.js](https://nodejs.org/en) - Server Runtime Environment
+- [Express.js](https://expressjs.com/) - Web Framework
 
 This version uses React, Redux, Node, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
