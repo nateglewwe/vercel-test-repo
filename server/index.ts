@@ -4,6 +4,9 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5001;
 const fileUpload = require('express-fileupload');
 
+// For getting Vercel to work
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 // Middleware Includes
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
